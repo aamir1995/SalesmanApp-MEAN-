@@ -1,0 +1,26 @@
+<md-content layout-padding>
+    <div>
+
+        <form ng-submit="createCompany()">
+            <md-input-container class="md-block">
+                <label>Company Name</label>
+                <input type="text" md-maxlength="30" required ng-model="companyInfo.companyName">
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label>Products Type</label>
+                <input type="text" required ng-model="companyInfo.products">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Address</label>
+                <input type="text" required ng-model="companyInfo.address">
+            </md-input-container>
+            <md-input-container class="md-raised md-primary">
+                <input aria-label=aria-label type="Submit" value="Create">
+            </md-input-container>
+        </form>
+
+    </div>
+</md-content>

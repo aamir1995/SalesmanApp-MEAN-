@@ -1,0 +1,27 @@
+<md-content layout-padding>
+    <div style="width:50%; margin:auto">
+
+        <form ng-submit="saveData()">
+            <md-input-container class="md-block">
+                <label>Name</label>
+                <input type="text" md-maxlength="30" name="name" required ng-model="user.name">
+            </md-input-container>
+
+
+            <md-input-container class="md-block">
+                <label>Email</label>
+                <input type="email" name="email" required ng-model="user.email">
+            </md-input-container>
+
+            <md-input-container class="md-block">
+                <label>Password</label>
+                <input type="password" name="password" required ng-model="user.password">
+            </md-input-container>
+            <md-input-container class="md-raised md-primary">
+                <input aria-label=aria-label type="submit" value="Signup">
+            </md-input-container>
+
+        </form>
+
+    </div>
+</md-content>
