@@ -89,4 +89,22 @@ function createCompany(arg){
     
 }
 
-export {saveUser, login, createCompany}
+function findCompany(arg){
+    let defferred = q.defer();
+    
+    companyModel.findOne(arg, (err, data)=>{
+        if(err){
+            console.log("no company found");
+            defferred.reject(err);
+        }else if(!data){
+            console.log("no company found");
+            
+        }else{
+            console.log("successfully found company "+data);
+            defferred.resolve(data);
+        }
+    })
+    return defferred.promise;
+}
+
+export {saveUser, login, createCompany, findCompany}

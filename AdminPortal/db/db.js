@@ -76,3 +76,21 @@ function createCompany(arg) {
     return defferred.promise;
 }
 exports.createCompany = createCompany;
+function findCompany(arg) {
+    var defferred = q.defer();
+    companyModel.findOne(arg, function (err, data) {
+        if (err) {
+            console.log("no company found");
+            defferred.reject(err);
+        }
+        else if (!data) {
+            console.log("no company found");
+        }
+        else {
+            console.log("successfully found company " + data);
+            defferred.resolve(data);
+        }
+    });
+    return defferred.promise;
+}
+exports.findCompany = findCompany;

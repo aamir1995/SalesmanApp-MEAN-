@@ -37,17 +37,17 @@ router.post("/login", function (req, res) {
         }
         else {
             if (user.password == data.password) {
-                console.log("successfully logged in");
-                res.send({ token: data.firebaseToken, userName: data.name });
-                console.log(data);
-                console.log(data.firebaseToken);
-                db_1.login({ adminId: user.firebaseToken })
-                    .then(function (companyData) {
-                    console.log(companyData, "new company data");
-                    res.send(companyData);
-                }), function (err) {
-                    console.log(err);
-                };
+                console.log("successfully logged in", data);
+                //res.send({token : data.firebaseToken, userName: data.name});
+                var obj1 = { token: data.firebaseToken, userName: data.name };
+                db_1.findCompany({ adminId: data.firebaseToken })
+                    .then(function (data) {
+                    //res.send(data);
+                    res.json({ success: true, data: data, "token": obj1, "msg": "got data" });
+                    console.log(data);
+                }, function (err) {
+                    console.log("err in fetching company data from Database ", err);
+                });
             }
             else {
                 console.log("incorrect passsword");
@@ -60,13 +60,16 @@ router.post("/login", function (req, res) {
     };
 });
 router.post("/newCompany", function (req, res) {
-    db_1.createCompany(req.body.data)
+    //console.log(req.body);
+    db_1.createCompany(req.body)
         .then(function (data) {
         console.log(data, "successfully created your company");
-        res.send(success, true, data, data);
+        res.send(data);
     }, function (err) {
-        console.log(err, "errorr in creating company");
-        res.send(success, false, data, err);
+        console.log(err, "error in creating company");
+        res.send(err);
     });
+});
+router.post("/userProfile", function (req, res) {
 });
 module.exports = router;

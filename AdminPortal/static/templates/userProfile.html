@@ -1,8 +1,31 @@
 <div layout="column" layout-padding layout-wrap layout-fill ng-cloak layout-align="center center">
     <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
-        <div>Please Add your company to get Started!</div>
+        <md-subheader class="md-no-sticky">You have no company yet, Click on Add button to create one.</md-subheader>
+        <md-divider></md-divider>
+        <div style="text-align:center;">
+            <md-button class="md-raised md-primary" ng-href="#/newCompany">Add</md-button>
+        </div>
+    </md-whiteframe>
+</div>
+
+<div layout="column" layout-padding layout-wrap layout-fill ng-cloak layout-align="center center">
+    <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
         <div>
-            <md-button style="display:block; margin:auto;" class="md-raised md-primary" ng-href="#/newCompany">Add</md-button>
+            <md-list ng-cloak>
+                <md-subheader class="md-no-sticky">Your Company Details.</md-subheader>
+                <md-divider></md-divider>
+
+                <md-list-item class="secondary-button-padding md-3-line">
+                     <img ng-src="" class="md-avatar" alt="" />
+                    <div class="md-list-item-text" layout="column">
+                        <h3>NTN Travel Agency</h3>
+                        <h4>Travel Services</h4>
+                        <p>Block B, Burns Road, Karachi.</p>
+                    </div>
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+
         </div>
     </md-whiteframe>
 </div>

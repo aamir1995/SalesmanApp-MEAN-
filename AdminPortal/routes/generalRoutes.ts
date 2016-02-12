@@ -1,6 +1,6 @@
 /// <reference path = "../typings/tsd.d.ts" />
 
-import {saveUser, login, createCompany} from "../db/db";
+import {saveUser, login, createCompany, findCompany} from "../db/db";
 import express = require("express");
 import firebase = require("firebase");
 
@@ -42,18 +42,21 @@ router.post("/signup", (req:express.Request, res:express.Response)=>{
                 return;
             }  else {
              if(user.password == data.password){
-                 console.log("successfully logged in");
-                 res.send({token : data.firebaseToken, userName: data.name});
-                 console.log(data)
-                 console.log(data.firebaseToken);
-                 login({adminId: user.firebaseToken})
-                    .then((companyData)=>{
-                        console.log(companyData, "new company data");
-                        res.send(companyData)
-                    }),(err){
-                        console.log(err);
-                    }
-                 } else {
+                 console.log("successfully logged in", data);
+                 //res.send({token : data.firebaseToken, userName: data.name});
+                 let obj1 = {token : data.firebaseToken, userName: data.name}
+                 
+                 findCompany({adminId : data.firebaseToken})
+                    .then((data)=>{
+                        //res.send(data);
+                        res.json({success: true, data:data, "token":obj1,"msg":"got data"});
+                        console.log(data);
+                
+            }, (err)=>{
+                console.log("err in fetching company data from Database ",err)
+            })
+                 
+                  } else {
                      console.log("incorrect passsword");
                      res.send({success: false});
                  };   
@@ -64,19 +67,25 @@ router.post("/signup", (req:express.Request, res:express.Response)=>{
      });
      
      router.post("/newCompany", (req:express.Request, res:express.Response)=>{
-         
-        
-         createCompany(req.body.data)
+         //console.log(req.body);
+         createCompany(req.body)
             .then((data)=>{
                 console.log(data, "successfully created your company");
-                res.send(success: true, data: data)
+                res.send(data);
             },(err){
-                console.log(err, "errorr in creating company");
-                res.send(success: false, data:err);
+                console.log(err, "error in creating company");
+                res.send(err);
             }
             );
             
-     })
+     });
+     
+       router.post("/userProfile", (req:express.Request, res:express.Response)=>{
+         
+         
+     });
+     
+     
 
 
 module.exports = router;
