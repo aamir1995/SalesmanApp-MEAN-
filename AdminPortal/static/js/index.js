@@ -8,19 +8,19 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
                 url: "/login",
                 templateUrl: "/templates/signin.html",
                 controller: "loginController",
-              
+
             })
             .state("signup", {
                 url: "/signup",
                 templateUrl: "/templates/signup.html",
                 controller: "signupController",
-               
+
             })
             .state("home", {
                 url: "/home",
                 templateUrl: "/templates/home.html",
                 controller: "homeController",
-                
+
             })
             .state("userProfile", {
                 url: "/userProfile",
@@ -39,12 +39,12 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
     })
 
     .run(function ($rootScope, $state) {
-        
-        
-        
+
+
+
         console.log("runPhase running perfectly");
-        
-        $rootScope.$on("$stateChangeStart", function(event, toState, fromState){
+
+        $rootScope.$on("$stateChangeStart", function (event, toState, fromState) {
             var firebaseToken = localStorage.getItem("token");
             console.log(toState.loginRequired);
             console.log("under runphase nested function");
@@ -54,8 +54,8 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
             }
         });
     })
-    
-    
+
+
     .factory("httpInterceptor", function () {
         return {
             request: function (config) {
@@ -67,6 +67,28 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
                 return config;
             }
         }
+    })
+
+    .service("getCompanyService", function ($http, $q) {
+        console.log('company service')
+
+
+        this.getCompanyData = function () {
+            var deferred = $q.defer();
+            //var token = localStorage.getItem("token");
+
+            $http.get("api/getCompanyInfo")
+                .then(function (response) {
+                    deferred.resolve(response);
+
+                }, function err(err) {
+                    deferred.reject(err);
+
+                })
+            return deferred.promise;
+        }
+
+
     });
     
 

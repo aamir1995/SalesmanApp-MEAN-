@@ -20,11 +20,10 @@ angular.module("app")
                         localStorage.setItem('token', response.token);
                         $rootScope.currentUser = response.userName;
                         $state.go("userProfile");
-
                     }
                 })
                 .error(function (err) {
-                    console.log("errorr in sign in");
+                    console.log("error in sign in");
                     console.log(err);
                     $state.go("/login");
 
@@ -55,8 +54,15 @@ angular.module("app")
 
     })
 
-    .controller("userProfileController", function ($rootScope, $scope, $http, $state) {
+    .controller("userProfileController", function ($rootScope, getCompanyService) {
         $rootScope.headerElements = false;
+        //console.log(getCompanyService.);
+        getCompanyService.getCompanyData()
+        .then(function (response) {
+            console.log(response);
+        },function(error){
+            console.log(error);
+        })
         
         
         }

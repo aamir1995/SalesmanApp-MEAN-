@@ -17,10 +17,16 @@ router.post("/signup", function (req, res) {
             db_1.saveUser(req.body.data)
                 .then(function (data) {
                 console.log("successfully added ", data + " (generalRoutes)");
-                res.send({ success: true, data: data });
+                res.send({
+                    success: true,
+                    data: data
+                });
             }, function (err) {
                 console.log("err", err);
-                res.send({ success: false, data: err });
+                res.send({
+                    success: false,
+                    data: err
+                });
             });
         }
     });
@@ -38,16 +44,7 @@ router.post("/login", function (req, res) {
         else {
             if (user.password == data.password) {
                 console.log("successfully logged in", data);
-                //res.send({token : data.firebaseToken, userName: data.name});
-                var obj1 = { token: data.firebaseToken, userName: data.name };
-                db_1.findCompany({ adminId: data.firebaseToken })
-                    .then(function (data) {
-                    //res.send(data);
-                    res.json({ success: true, data: data, "token": obj1, "msg": "got data" });
-                    console.log(data);
-                }, function (err) {
-                    console.log("err in fetching company data from Database ", err);
-                });
+                res.send({ token: data.firebaseToken, userName: data.name });
             }
             else {
                 console.log("incorrect passsword");
@@ -71,5 +68,17 @@ router.post("/newCompany", function (req, res) {
     });
 });
 router.post("/userProfile", function (req, res) {
+});
+router.get("/getCompanyInfo", function (req, res) {
+    console.log(req.query.token);
+    db_1.findCompany({
+        adminId: req.query.token
+    })
+        .then(function (data) {
+        res.send(data);
+    }, function (err) {
+        console.log(err, "err in fetching company data");
+        res.send(err);
+    });
 });
 module.exports = router;
