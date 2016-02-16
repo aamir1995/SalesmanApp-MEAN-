@@ -35,8 +35,18 @@ let newCompanySchema = new mongoose.Schema({
     adminId: {type: String}
 })
 
+let addSalesmanSchema = new mongoose.Schema({
+    name: {type: String},
+    region: {type: String},
+    id: {type: String},
+    password: {type: String},
+    uniqueId: {type: String}
+})
+
+
 let userModel = mongoose.model("users", userSchema);
 let companyModel = mongoose.model("companies", newCompanySchema);
+let addSalesmanModel = mongoose.model("salesmen", addSalesmanSchema);
 
 
 function saveUser(args){
@@ -107,4 +117,36 @@ function findCompany(arg){
     return defferred.promise;
 }
 
-export {saveUser, login, createCompany, findCompany}
+function addSalesman(arg){
+    let salesmen = new addSalesmanModel(arg);
+    let deferred = q.defer();
+    
+    salesmen.save((err, success)=>{
+        if(err){
+            console.log("error in creating new salesman " + err);
+            deferred.reject(err);
+        }else{
+            console.log("successfully created new Salesman", + success);
+            deferred.resolve(success);
+        }
+    })
+    
+    return deferred.promise;    
+}
+
+function findSalesmen(arg){
+    let deferred = q.defer();
+    
+    addSalesmanModel.find(arg, (err, data)=>{
+        if(err){
+            console.log(err)
+        }if else(!data){
+            console.log("no salesman found");
+        }else{
+            console.log(data);
+        }
+    })
+        
+}
+
+export {saveUser, login, createCompany, findCompany, addSalesman}

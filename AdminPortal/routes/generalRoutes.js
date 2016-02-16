@@ -81,4 +81,13 @@ router.get("/getCompanyInfo", function (req, res) {
         res.send(err);
     });
 });
+router.post("/newSalesman", function (req, res) {
+    console.log(req.body);
+    db_1.addSalesman(req.body)
+        .then(function (data) {
+        res.send(data);
+    }, function (err) {
+        res.send(err);
+    });
+});
 module.exports = router;

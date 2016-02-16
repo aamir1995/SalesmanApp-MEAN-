@@ -1,4 +1,4 @@
-<div layout="column" layout-padding layout-wrap layout-fill ng-cloak layout-align="center center">
+<div ng-show="ifCompany" layout="column" layout-padding layout-wrap layout-fill ng-cloak layout-align="center center">
     <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
         <md-subheader class="md-no-sticky">You have no company yet, Click on Add button to create one.</md-subheader>
         <md-divider></md-divider>
@@ -8,7 +8,7 @@
     </md-whiteframe>
 </div>
 
-<div layout="column" layout-padding layout-wrap layout-fill ng-cloak layout-align="center center">
+<div ng-show="ifCompany" style="width:50%; margin:0 auto" layout="column" layout-padding layout-wrap layout-fill ng-cloak>
     <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
         <div>
             <md-list ng-cloak>
@@ -16,11 +16,11 @@
                 <md-divider></md-divider>
 
                 <md-list-item class="secondary-button-padding md-3-line">
-                     <img ng-src="" class="md-avatar" alt="" />
+                    <img ng-src="" class="md-avatar" alt="" />
                     <div class="md-list-item-text" layout="column">
-                        <h3>NTN Travel Agency</h3>
-                        <h4>Travel Services</h4>
-                        <p>Block B, Burns Road, Karachi.</p>
+                        <h3>{{company.companyName}}</h3>
+                        <h4>{{company.products}}</h4>
+                        <p>{{company.address}}</p>
                     </div>
                 </md-list-item>
                 <md-divider></md-divider>
@@ -29,3 +29,28 @@
         </div>
     </md-whiteframe>
 </div>
+
+<div ng-show="ifCompany" layout="column" style="width:100%; margin:0 auto" layout-padding layout-wrap layout-fill ng-cloak>
+    <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
+        <div>
+            <md-list ng-cloak>
+                <md-subheader class="md-no-sticky">Your Salesmen</md-subheader>
+                <md-divider></md-divider>
+
+                <md-list-item class="md-2-line">
+                    <img ng-src="" class="md-avatar" alt="" />
+                    <div class="md-list-item-text">
+                        <h3>{{companyInfo.name}}</h3>
+                        <p>{{companyInfo.region}}</p>
+                    </div>
+                </md-list-item>
+                <md-divider></md-divider>
+            </md-list>
+
+        </div>
+    </md-whiteframe>
+</div>
+
+<md-button class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)">
+        Add
+      </md-button>

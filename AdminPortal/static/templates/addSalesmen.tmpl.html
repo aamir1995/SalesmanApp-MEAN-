@@ -1,0 +1,47 @@
+<md-dialog ng-cloak style="width:70%;">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add Salesman</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                X
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <md-content>
+            <div layout-padding>
+
+                <form ng-submit="createSalesman()">
+                    <md-input-container class="md-block">
+                        <label>Salesman Name</label>
+                        <input type="text" md-maxlength="30" name="salesmanName" required ng-model="salesman.name">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Region</label>
+                        <input type="text" name="salesmanRegion" required ng-model="salesman.region">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Salesman ID</label>
+                        <input type="text" name="salesmanId" required ng-model="salesman.id">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Salesman Password</label>
+                        <input type="text" name="salesmanPassword" required ng-model="salesman.password">
+                    </md-input-container>
+                    <md-input-container class="md-raised md-primary">
+                        <input aria-label=aria-label type="submit" value="Signup">
+                    </md-input-container>
+
+                </form>
+
+            </div>
+        </md-content>
+    </md-dialog-content>
+
+</md-dialog>

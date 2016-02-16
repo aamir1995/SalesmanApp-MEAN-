@@ -29,8 +29,16 @@ var newCompanySchema = new mongoose.Schema({
     address: { type: String },
     adminId: { type: String }
 });
+var addSalesmanSchema = new mongoose.Schema({
+    name: { type: String },
+    region: { type: String },
+    id: { type: String },
+    password: { type: String },
+    uniqueId: { type: String }
+});
 var userModel = mongoose.model("users", userSchema);
 var companyModel = mongoose.model("companies", newCompanySchema);
+var addSalesmanModel = mongoose.model("salesmen", addSalesmanSchema);
 function saveUser(args) {
     var defferred = q.defer();
     var user = new userModel(args);
@@ -94,3 +102,37 @@ function findCompany(arg) {
     return defferred.promise;
 }
 exports.findCompany = findCompany;
+function addSalesman(arg) {
+    var salesmen = new addSalesmanModel(arg);
+    var deferred = q.defer();
+    salesmen.save(function (err, success) {
+        if (err) {
+            console.log("error in creating new salesman " + err);
+            deferred.reject(err);
+        }
+        else {
+            console.log("successfully created new Salesman", +success);
+            deferred.resolve(success);
+        }
+    });
+    return deferred.promise;
+}
+exports.addSalesman = addSalesman;
+function findSalesmen(arg) {
+    var deferred = q.defer();
+    addSalesmanModel.find(arg, function (err, data) {
+        if (err) {
+            console.log(err);
+        }
+        if ()
+            ;
+        else
+            (!data);
+        {
+            console.log("no salesman found");
+        }
+        {
+            console.log(data);
+        }
+    });
+}

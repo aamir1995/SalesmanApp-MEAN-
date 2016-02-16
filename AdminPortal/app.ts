@@ -17,7 +17,6 @@ app.use(express.static(staticFilesPath));
 app.use(bodyParser.json());
 app.use("/api", routes);
 
-
 app.listen(port, (err) => {
     if (err) {
         console.log(err);

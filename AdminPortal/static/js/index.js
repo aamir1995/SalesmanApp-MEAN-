@@ -44,7 +44,7 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
 
         console.log("runPhase running perfectly");
 
-        $rootScope.$on("$stateChangeStart", function (event, toState, fromState) {
+        $rootScope.$on("$stateChangeStart", function (event, toState) {
             var firebaseToken = localStorage.getItem("token");
             console.log(toState.loginRequired);
             console.log("under runphase nested function");
@@ -89,7 +89,24 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
         }
 
 
-    });
+    })
+
+    .service("getAllData", function ($http) {
+        console.log("getAllData service");
+
+        this.getAllData = function (url) {
+            $http.get(url)
+                .then(function (response) {
+                    console.log("got data AGAIN", response)
+                }, function err(err) {
+                    console.log(err);
+                });
+        }
+
+    })
+    
+    
+   
     
 
     

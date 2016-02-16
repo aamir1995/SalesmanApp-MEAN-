@@ -24,8 +24,8 @@
     <md-toolbar ng-controller="indexController">
         <div class="md-toolbar-tools">
             <h2>
-          <span ng-show="headerElements">Salesman App</span>
-          <span ng-hide="headerElements">{{currentUser}}</span>
+          <span>{{headerName}}</span>
+          <!--<span ng-hide="headerElements">{{currentUser}}</span>-->
         </h2>
             <span flex></span>
             <md-button class="md-raised" ng-show="headerElements" aria-label="Sign in" ng-href="#/login">
