@@ -21,7 +21,6 @@ angular.module("app")
         $scope.login = function () {
             $http.post("api/login", { data: $scope.user })
                 .success(function (response) {
-                    console.log('asd',response)
                     if (response.token) {
                         localStorage.setItem('token', response.token);
                         $rootScope.headerName = response.userName;
@@ -60,7 +59,7 @@ angular.module("app")
     })
 
     
-    .controller("userProfileController", function ($scope, $rootScope, getCompanyService,  $mdDialog, $mdMedia) {
+    .controller("userProfileController", function ($scope, $rootScope, getCompanyService,getSalesmenInfo,  $mdDialog, $mdMedia) {
         
         
         $scope.ifCompany = true; 
@@ -68,15 +67,20 @@ angular.module("app")
         $rootScope.headerElements = false;
         getCompanyService.getCompanyData()
         .then(function (response) {
-          $scope.company = response.data;
-                console.log($scope.company)
-        //         if($scope.company){
-        //     $scope.ifCompany = false;
-        // }            
+          $scope.company = response.data;          
             },function(error){
             console.log(error);
         })
         
+        //console.log(getSalesmenInfo.getSalesmanData())
+        getSalesmenInfo.getSalesmanData()
+            .then(function (response) {
+                console.log(response.data)
+                $scope.allSalesmen = response.data;
+                console.log($scope.allSalesmen)
+            }, function (error) {
+                console.log(error);
+            })
         
         
         //add salesman FAB Button code
@@ -107,15 +111,15 @@ angular.module("app")
       $scope.createSalesman = function(){
           $scope.salesman.uniqueId = localStorage.getItem("token");
       $http.post("api/newSalesman", $scope.salesman)
-        .success(function(data){
-            console.log(data);
-            $rootScope.companyInfo = data;
-            //console.log($scope.companyInfo);
-            $mdDialog.cancel();
-        })
-        .error(function(err){
-            console.log(err);
-        })
+        // .success(function(data){
+        //     console.log(data);
+        //     $rootScope.companyInfo = data;
+        //     //console.log($scope.companyInfo);
+        //     $mdDialog.cancel();
+        // })
+        // .error(function(err){
+        //     console.log(err);
+        // })
       }
              $scope.hide = function() {
     $mdDialog.hide();
@@ -141,14 +145,7 @@ angular.module("app")
         
         $scope.createCompany = function(){
         $http.post("api/newCompany", $scope.companyInfo)
-            // .success(function(data){
-            //     console.log(data + "from newCompanyController");
-            //     $state.go($state.current, {}, {reload: true})
-                
-            // }).error(function(err){
-            //    console.log(err);
-            // })
-            .then(function(data){
+           .then(function(data){
                 console.log(data + "from newCompanyController");
                //$state.go($state.current, {}, {reload: true})
                $state.go("userProfile")
@@ -156,6 +153,5 @@ angular.module("app")
             }, function(err){
                 console.log(err);
             })
-        
-        
+                
         }})

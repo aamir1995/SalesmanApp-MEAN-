@@ -1,7 +1,7 @@
 /// <reference path = "../typings/tsd.d.ts" />
 
 import {
-    saveUser, login, createCompany, findCompany, addSalesman
+    saveUser, login, createCompany, findCompany, addSalesman, findSalesmen
 }
 from "../db/db";
 import express = require("express");
@@ -76,9 +76,20 @@ router.post("/newCompany", (req: express.Request, res: express.Response) => {
 
 });
 
-router.post("/userProfile", (req: express.Request, res: express.Response) => {
+router.get("/userProfile", (req: express.Request, res: express.Response) => {
+        
 
+});
 
+router.get("/getSalesmanInfo", (req: express.Request, res: express.Response)=>{
+    findSalesmen({uniqueId: req.query.token})
+                .then((data)=>{
+                    console.log(data);
+                    res.send(data);
+                }, (err)=>{
+                    console.log(err);
+                    res.send(err);
+                })
 });
 
 
@@ -88,12 +99,13 @@ router.get("/getCompanyInfo", (req: express.Request, res: express.Response) => {
                     adminId: req.query.token
                 })
                 .then((data) => {
+                    
                     res.send(data);
                 }, (err) => {
                     console.log(err, "err in fetching company data");
                     res.send(err);
                 })
-)
+);
 
 router.post("/newSalesman", (req: express.Request, res: express.Response)=>{
     
@@ -104,7 +116,7 @@ router.post("/newSalesman", (req: express.Request, res: express.Response)=>{
         }, (err)=>{
             res.send(err);
         });
-})
+});
 
 
 module.exports = router;

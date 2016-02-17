@@ -88,7 +88,6 @@ function findCompany(arg) {
     var defferred = q.defer();
     companyModel.findOne(arg, function (err, data) {
         if (err) {
-            console.log("no company found");
             defferred.reject(err);
         }
         else if (!data) {
@@ -121,18 +120,17 @@ exports.addSalesman = addSalesman;
 function findSalesmen(arg) {
     var deferred = q.defer();
     addSalesmanModel.find(arg, function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-        if ()
-            ;
-        else
-            (!data);
-        {
+        if (data.length == 0) {
             console.log("no salesman found");
         }
-        {
+        else if (err) {
+            deferred.reject(err);
+        }
+        else {
             console.log(data);
+            deferred.resolve(data);
         }
     });
+    return deferred.promise;
 }
+exports.findSalesmen = findSalesmen;

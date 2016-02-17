@@ -104,11 +104,9 @@ function findCompany(arg){
     
     companyModel.findOne(arg, (err, data)=>{
         if(err){
-            console.log("no company found");
             defferred.reject(err);
         }else if(!data){
-            console.log("no company found");
-            
+            console.log("no company found");            
         }else{
             console.log("successfully found company "+data);
             defferred.resolve(data);
@@ -138,15 +136,18 @@ function findSalesmen(arg){
     let deferred = q.defer();
     
     addSalesmanModel.find(arg, (err, data)=>{
-        if(err){
-            console.log(err)
-        }if else(!data){
-            console.log("no salesman found");
-        }else{
-            console.log(data);
+        if(data.length == 0){
+            console.log("no salesman found")     
+        } else if(err){
+            deferred.reject(err)
+        } else{
+            console.log(data)
+            deferred.resolve(data);
         }
     })
+    
+    return deferred.promise;
         
 }
 
-export {saveUser, login, createCompany, findCompany, addSalesman}
+export {saveUser, login, createCompany, findCompany, addSalesman, findSalesmen}

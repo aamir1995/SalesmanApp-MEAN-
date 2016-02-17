@@ -67,7 +67,17 @@ router.post("/newCompany", function (req, res) {
         res.send(err);
     });
 });
-router.post("/userProfile", function (req, res) {
+router.get("/userProfile", function (req, res) {
+});
+router.get("/getSalesmanInfo", function (req, res) {
+    db_1.findSalesmen({ uniqueId: req.query.token })
+        .then(function (data) {
+        console.log(data);
+        res.send(data);
+    }, function (err) {
+        console.log(err);
+        res.send(err);
+    });
 });
 router.get("/getCompanyInfo", function (req, res) {
     console.log(req.query.token);

@@ -75,13 +75,12 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
 
         this.getCompanyData = function () {
             var deferred = $q.defer();
-            //var token = localStorage.getItem("token");
 
             $http.get("api/getCompanyInfo")
                 .then(function (response) {
                     deferred.resolve(response);
 
-                }, function err(err) {
+                }, function (err) {
                     deferred.reject(err);
 
                 })
@@ -89,6 +88,21 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
         }
 
 
+    })
+
+    .service("getSalesmenInfo", function ($http, $q) {
+        
+        this.getSalesmanData = function () {
+            var deferred = $q.defer();
+
+            $http.get("api/getSalesmanInfo")
+                .then(function (response) {
+                    deferred.resolve(response);
+                }, function (err) {
+                    deferred.reject(err)
+                })
+            return deferred.promise;
+        }
     })
 
     .service("getAllData", function ($http) {
