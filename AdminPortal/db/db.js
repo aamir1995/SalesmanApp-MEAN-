@@ -134,3 +134,16 @@ function findSalesmen(arg) {
     return deferred.promise;
 }
 exports.findSalesmen = findSalesmen;
+function getDataAgain(arg) {
+    var defferred = q.defer();
+    userModel.findOne(arg, function (err, data) {
+        if (err) {
+            defferred.reject(err);
+        }
+        else {
+            defferred.resolve(data);
+        }
+    });
+    return defferred.promise;
+}
+exports.getDataAgain = getDataAgain;

@@ -1,7 +1,7 @@
 /// <reference path = "../typings/tsd.d.ts" />
 
 import {
-    saveUser, login, createCompany, findCompany, addSalesman, findSalesmen
+    saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain
 }
 from "../db/db";
 import express = require("express");
@@ -118,5 +118,17 @@ router.post("/newSalesman", (req: express.Request, res: express.Response)=>{
         });
 });
 
+router.get("/getUserDataAgain", (req: express.Request, res: express.Response)=>{
+   
+    
+    getDataAgain({firebaseToken: req.query.token})
+        .then((data)=>{
+           // console.log("new data ",data)
+            res.send(data.name);
+        }, (err)=>{
+            console.log(err);
+        })
+})
+    
 
 module.exports = router;

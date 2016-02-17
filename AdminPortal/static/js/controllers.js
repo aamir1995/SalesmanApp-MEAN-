@@ -2,16 +2,9 @@ angular.module("app")
 
 
     .controller("indexController", function ($rootScope, $scope) {
-        $rootScope.headerName = "Salesman App";
-        // (function(){
-        //     if(localStorage.getItem){
-        //         $rootScope.headerName = $rootScope.currentUser;
-        //     }
-        // })();
-        //$rootScope.headerName = "Salesman App";
+        $rootScope.headerName = "Salesman App";       
         $rootScope.headerElements = true;
-        // $scope.currentUser = $rootScope.userName;
-        // console.log($scope.currentUser, "current user from index controller");
+      
     })
 
     .controller("loginController", function ($rootScope, $scope, $http, $state) {
@@ -23,7 +16,6 @@ angular.module("app")
                 .success(function (response) {
                     if (response.token) {
                         localStorage.setItem('token', response.token);
-                        $rootScope.headerName = response.userName;
                         $state.go("userProfile");
                     }
                 })
@@ -59,8 +51,16 @@ angular.module("app")
     })
 
     
-    .controller("userProfileController", function ($scope, $rootScope, getCompanyService,getSalesmenInfo,  $mdDialog, $mdMedia) {
+    .controller("userProfileController", function ($scope, $rootScope, getCompanyService, getSalesmenInfo, $mdDialog, $mdMedia, $http) {
         
+        $http.get("api/getUserDataAgain")
+            .success(function (response) {
+                console.log(response);
+                $rootScope.currentUser = response;
+               
+            }, function (err) {
+                console.log(err);
+            });
         
         $scope.ifCompany = true; 
         
@@ -72,7 +72,7 @@ angular.module("app")
             console.log(error);
         })
         
-        //console.log(getSalesmenInfo.getSalesmanData())
+        
         getSalesmenInfo.getSalesmanData()
             .then(function (response) {
                 console.log(response.data)

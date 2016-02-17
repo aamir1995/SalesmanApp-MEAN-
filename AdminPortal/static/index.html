@@ -24,8 +24,8 @@
     <md-toolbar ng-controller="indexController">
         <div class="md-toolbar-tools">
             <h2>
-          <span>{{headerName}}</span>
-          <!--<span ng-hide="headerElements">{{currentUser}}</span>-->
+          <span ng-show="headerElements">{{headerName}}</span>
+          <span ng-hide="headerElements">{{currentUser}}</span>
         </h2>
             <span flex></span>
             <md-button class="md-raised" ng-show="headerElements" aria-label="Sign in" ng-href="#/login">
@@ -41,24 +41,6 @@
 
         </div>
     </md-toolbar>
-
-    <!--<div width layout="row" layout-align="center center" layout-padding layout-wrap layout-fill style="padding-bottom: 32px;"
-ng-cloak>
-    
-
-    <md-card style="width:50%;" layout-align="center">
-
-        <md-button class="md-raised" aria-label="Sign in" ng-href="#/login">
-            Sign in
-        </md-button>
-        <md-button class="md-raised md-warn" aria-label="Signup" ng-href="#/signup">
-            Signup
-        </md-button>
-
-
-    </md-card>
-</div>-->
-
 
     <div ui-view></div>
 

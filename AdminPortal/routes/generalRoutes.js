@@ -100,4 +100,13 @@ router.post("/newSalesman", function (req, res) {
         res.send(err);
     });
 });
+router.get("/getUserDataAgain", function (req, res) {
+    db_1.getDataAgain({ firebaseToken: req.query.token })
+        .then(function (data) {
+        // console.log("new data ",data)
+        res.send(data.name);
+    }, function (err) {
+        console.log(err);
+    });
+});
 module.exports = router;
