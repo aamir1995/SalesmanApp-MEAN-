@@ -21,7 +21,7 @@
 </head>
 
 <body ng-app="app">
-    <md-toolbar ng-controller="indexController">
+    <md-toolbar ng-controller="indexController" style="position:fixed; top:0;">
         <div class="md-toolbar-tools">
             <h2>
           <span ng-show="headerElements">{{headerName}}</span>
@@ -40,9 +40,13 @@
 
 
         </div>
+
     </md-toolbar>
 
-    <div ui-view></div>
+
+
+    <div style="margin-top:80px;" ui-view></div>
+
 
 </body>
 

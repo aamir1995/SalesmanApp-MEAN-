@@ -2,44 +2,59 @@ angular.module("app")
 
 
     .controller("indexController", function ($rootScope, $scope) {
+    //   $scope.toast = function (){
+    //       toastService.showSimpleToast()
+    //   }
+      
+      
+       
         $rootScope.headerName = "Salesman App";       
         $rootScope.headerElements = true;
       
     })
 
-    .controller("loginController", function ($rootScope, $scope, $http, $state) {
-       
+    .controller("loginController", function ($rootScope, $scope, $http, $state, toastService) {
+       $scope.progress1 = false;
         $scope.user = {};
 
         $scope.login = function () {
+             $scope.progress1 = true;
             $http.post("api/login", { data: $scope.user })
                 .success(function (response) {
                     if (response.token) {
                         localStorage.setItem('token', response.token);
+                        $scope.progress1 = false;
                         $state.go("userProfile");
+                        toastService.showSimpleToast()
+                        
                     }
                 })
                 .error(function (err) {
                     console.log("error in sign in");
                     console.log(err);
+                    $scope.progress1 = false;                    
                     $state.go("/login");
-
                 })
         }
 
     })
 
 
-    .controller("signupController", function ($scope, $http, $state) {
+    .controller("signupController", function ($scope, $http, $state, toastService) {
+        $scope.progress2 = false;
         $scope.user = {};
         $scope.saveData = function () {
+            $scope.progress2 = true;
             $http.post("api/signup", { data: $scope.user })
                 .success(function (data) {
+                    toastService.showSimpleToast()
                     console.log(data);
                     console.log("successfully added (index.js)")
+                    $scope.progress2 = false;
                     $state.go("login");
                 })
                 .error(function (err) {
+                    $scope.progress2 = false;
                     console.log(err);
                 })
         }
@@ -52,7 +67,7 @@ angular.module("app")
 
     
     .controller("userProfileController", function ($scope, $rootScope, getCompanyService, getSalesmenInfo, $mdDialog, $mdMedia, $http) {
-        
+       
         $http.get("api/getUserDataAgain")
             .success(function (response) {
                 console.log(response);
@@ -62,12 +77,13 @@ angular.module("app")
                 console.log(err);
             });
         
-        $scope.ifCompany = true; 
+        
         
         $rootScope.headerElements = false;
         getCompanyService.getCompanyData()
         .then(function (response) {
-          $scope.company = response.data;          
+          $scope.company = response.data;
+          $scope.ifCompany = true;           
             },function(error){
             console.log(error);
         })
@@ -94,11 +110,6 @@ angular.module("app")
       clickOutsideToClose:true,
       fullscreen: useFullScreen
     })
-    .then(function(answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
-    }, function() {
-        $scope.status = 'You cancelled the dialog.';
-    });
     $scope.$watch(function() {
       return $mdMedia('xs') || $mdMedia('sm');
     }, function (wantsFullScreen) {
@@ -106,20 +117,23 @@ angular.module("app")
     });
   };
   
-  function addSalesmenController($rootScope, $http, $scope,  $mdDialog, $state){
+  function addSalesmenController($rootScope, $http, $scope,  $mdDialog, $state, toastService){
       
       $scope.createSalesman = function(){
           $scope.salesman.uniqueId = localStorage.getItem("token");
       $http.post("api/newSalesman", $scope.salesman)
-        // .success(function(data){
+        .success(function(){
         //     console.log(data);
         //     $rootScope.companyInfo = data;
         //     //console.log($scope.companyInfo);
-        //     $mdDialog.cancel();
+        //$mdDialog.cancel();
+        toastService.showSimpleToast()
+            $mdDialog.hide();
+            $state.go($state.current, {}, {reload: true})
         // })
         // .error(function(err){
         //     console.log(err);
-        // })
+        })
       }
              $scope.hide = function() {
     $mdDialog.hide();
@@ -131,12 +145,11 @@ angular.module("app")
     $mdDialog.hide(answer);
   };
         }
-        
-        
+                
         })
         
     
-    .controller("newCompanyController", function($scope, $http, $state){
+    .controller("newCompanyController", function($scope, $http, $state, toastService){
         $scope.token = localStorage.getItem("token");
         $scope.companyInfo = {};
         $scope.companyInfo.adminId = $scope.token;
@@ -146,10 +159,10 @@ angular.module("app")
         $scope.createCompany = function(){
         $http.post("api/newCompany", $scope.companyInfo)
            .then(function(data){
+               toastService.showSimpleToast()
                 console.log(data + "from newCompanyController");
-               //$state.go($state.current, {}, {reload: true})
                $state.go("userProfile")
-                
+                     
             }, function(err){
                 console.log(err);
             })

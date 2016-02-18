@@ -39,9 +39,7 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
     })
 
     .run(function ($rootScope, $state) {
-
-
-
+        
         console.log("runPhase running perfectly");
 
         $rootScope.$on("$stateChangeStart", function (event, toState) {
@@ -68,6 +66,7 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
             }
         }
     })
+    
 
     .service("getCompanyService", function ($http, $q) {
         console.log('company service')
@@ -87,11 +86,10 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
             return deferred.promise;
         }
 
-
     })
 
     .service("getSalesmenInfo", function ($http, $q) {
-        
+
         this.getSalesmanData = function () {
             var deferred = $q.defer();
 
@@ -117,6 +115,42 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
                 });
         }
 
+    })
+
+    .service("toastService", function ($mdToast) {
+        
+        var last = {
+            bottom: false,
+            top: true,
+            left: false,
+            right: true
+        };
+        
+        var toastPosition = angular.extend({}, last);
+        var getToastPosition = function () {
+            sanitizePosition();
+            return Object.keys(toastPosition)
+                .filter(function (pos) { return toastPosition[pos]; })
+                .join(' ');
+        };
+        
+        function sanitizePosition() {
+            var current = toastPosition;
+            if (current.bottom && last.top) current.top = false;
+            if (current.top && last.bottom) current.bottom = false;
+            if (current.right && last.left) current.left = false;
+            if (current.left && last.right) current.right = false;
+            last = angular.extend({}, current);
+        }
+
+        this.showSimpleToast = function () {
+            $mdToast.show(
+                $mdToast.simple()
+                    .textContent('Operation Successful!')
+                    .position(getToastPosition())
+                    .hideDelay(2000)
+                );
+        };
     })
     
     

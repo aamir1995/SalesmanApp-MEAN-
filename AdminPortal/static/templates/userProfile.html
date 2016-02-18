@@ -1,4 +1,4 @@
-<div ng-show="ifCompany" layout="column" layout-padding layout-wrap layout-fill ng-cloak layout-align="center center">
+<div ng-hide="ifCompany" layout="column" layout-padding layout-wrap layout-fill ng-cloak layout-align="center center">
     <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
         <md-subheader class="md-no-sticky">You have no company yet, Click on Add button to create one.</md-subheader>
         <md-divider></md-divider>
@@ -34,7 +34,10 @@
     <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
         <div>
             <md-list ng-cloak>
+                <div layout="row">                
                 <md-subheader class="md-no-sticky">Your Salesmen</md-subheader>
+                <md-progress-circular md-mode="indeterminate" ng-show="progress2"></md-progress-circular>
+                </div>
                 <md-divider></md-divider>
 
                 <md-list-item class="md-2-line" ng-repeat="salesmen in allSalesmen">
@@ -51,6 +54,8 @@
     </md-whiteframe>
 </div>
 
-<md-button class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)">
-        Add
-      </md-button>
+
+<md-button ng-show="ifCompany" style="position:fixed; bottom: 5;" class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)">
+    Add
+</md-button>
+
