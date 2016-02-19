@@ -6,15 +6,17 @@ let routes = require("./routes/generalRoutes");
 import express = require("express");
 import bodyParser = require("body-parser");
 import path = require("path");
+import cors = require("cors");
 
 
 let app = express();
 let port = process.env.port | 8000;
 let staticFilesPath = path.resolve(__dirname, "./static");
 
-
+app.use(cors());
 app.use(express.static(staticFilesPath));
 app.use(bodyParser.json());
+
 app.use("/api", routes);
 
 app.listen(port, (err) => {

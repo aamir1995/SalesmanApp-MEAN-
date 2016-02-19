@@ -61,10 +61,6 @@ angular.module("app")
 
     })
 
-    .controller("homeController", function ($scope, $http, $state) {
-
-    })
-
     
     .controller("userProfileController", function ($scope, $rootScope, getCompanyService, getSalesmenInfo, $mdDialog, $mdMedia, $http) {
        

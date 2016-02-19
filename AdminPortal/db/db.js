@@ -147,3 +147,15 @@ function getDataAgain(arg) {
     return defferred.promise;
 }
 exports.getDataAgain = getDataAgain;
+function salesmenLogin(arg) {
+    var deferred = q.defer();
+    addSalesmanModel.findOne(arg, function (err, data) {
+        if (err) {
+            deferred.reject(err);
+        }
+        else {
+            deferred.reslove(data);
+        }
+    });
+    return deferred.resolve;
+}

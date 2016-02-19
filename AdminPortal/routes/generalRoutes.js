@@ -109,4 +109,14 @@ router.get("/getUserDataAgain", function (req, res) {
         console.log(err);
     });
 });
+router.post("/salesmaLogin", function (req, res) {
+    var user = req.body;
+    db_1.salesmanLogin({ email: req.body.email })
+        .then(function (data) {
+        console.log(data);
+        res.send(data);
+    }, function (err) {
+        res.send(err);
+    });
+});
 module.exports = router;

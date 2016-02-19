@@ -16,12 +16,6 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
                 controller: "signupController",
 
             })
-            .state("home", {
-                url: "/home",
-                templateUrl: "/templates/home.html",
-                controller: "homeController",
-
-            })
             .state("userProfile", {
                 url: "/userProfile",
                 templateUrl: "/templates/userProfile.html",
@@ -31,7 +25,8 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
             .state("newCompany", {
                 url: "/newCompany",
                 templateUrl: "/templates/company.html",
-                controller: "newCompanyController"
+                controller: "newCompanyController",
+                loginRequired: true
             })
         $urlRouterProvider.otherwise("/");
 

@@ -165,4 +165,18 @@ function getDataAgain(arg){
     return defferred.promise;
 }
 
-export {saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain}
+function salesmenLogin(arg){
+    let deferred = q.defer();
+    
+    addSalesmanModel.findOne(arg, (err, data)=>{
+        if(err){
+            deferred.reject(err)
+        }else{
+            deferred.reslove(data)
+        }
+    })
+    
+    return deferred.resolve;
+}
+
+export {saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmanLogin}
