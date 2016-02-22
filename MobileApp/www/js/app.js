@@ -29,6 +29,12 @@ angular.module('starter', ['ionic'])
             controller: "loginController"
         })
         
+        .state("dashboard", {
+            url: "/dashboard",
+            templateUrl: "./templates/dashboard.html",
+            controller: "dashboardController"
+        })
+        
         $urlRouterProvider.otherwise("/")
            
 })

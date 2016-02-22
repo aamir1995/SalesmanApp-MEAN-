@@ -119,16 +119,10 @@ angular.module("app")
           $scope.salesman.uniqueId = localStorage.getItem("token");
       $http.post("api/newSalesman", $scope.salesman)
         .success(function(){
-        //     console.log(data);
-        //     $rootScope.companyInfo = data;
-        //     //console.log($scope.companyInfo);
-        //$mdDialog.cancel();
         toastService.showSimpleToast()
             $mdDialog.hide();
             $state.go($state.current, {}, {reload: true})
-        // })
-        // .error(function(err){
-        //     console.log(err);
+
         })
       }
              $scope.hide = function() {
@@ -137,10 +131,53 @@ angular.module("app")
   $scope.cancel = function() {
     $mdDialog.cancel();
   };
-  $scope.answer = function(answer) {
-    $mdDialog.hide(answer);
+        }
+        
+        
+            //add Product Button code
+         $scope.addProduct = function(ev) {
+    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+    $mdDialog.show({
+      controller: addProductController,
+      templateUrl: '../templates/addProduct.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: useFullScreen
+    })
+    $scope.$watch(function() {
+      return $mdMedia('xs') || $mdMedia('sm');
+    }, function (wantsFullScreen) {
+        $scope.customFullscreen = (wantsFullScreen === true);
+    });
+  };
+  
+   
+  function addProductController($scope,  $mdDialog, $http){
+    $scope.product = {
+        firebaseToken : localStorage.getItem("token")
+    }
+      
+    $scope.addProduct = function() {
+        $http.post("api/addProduct",  $scope.product)
+            .success(function (response) {
+                console.log(response);
+                console.log($scope.product)
+            })
+            .error(function (err) {
+                console.log(err);
+            })
+    }
+    
+    
+             $scope.hide = function() {
+    $mdDialog.hide();
+  };
+  $scope.cancel = function() {
+    $mdDialog.cancel();
   };
         }
+  
                 
         })
         

@@ -10,10 +10,11 @@ import cors = require("cors");
 
 
 let app = express();
+app.use(cors());
 let port = process.env.port | 8000;
 let staticFilesPath = path.resolve(__dirname, "./static");
 
-app.use(cors());
+
 app.use(express.static(staticFilesPath));
 app.use(bodyParser.json());
 

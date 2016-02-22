@@ -1,0 +1,37 @@
+<md-dialog ng-cloak style="width:50%;">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add Product</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="cancel()">
+                X
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+        <md-content>
+            <div layout-padding>
+
+                <form ng-submit="addProduct()">
+                    <md-input-container class="md-block">
+                        <label>Product Name</label>
+                        <input type="text" md-maxlength="30" required ng-model="product.name">
+                    </md-input-container>
+
+                    <md-input-container class="md-block">
+                        <label>Product Price (each)</label>
+                        <input type="number" required ng-model="product.price">
+                    </md-input-container>
+
+                    <md-input-container class="md-raised md-primary">
+                        <input aria-label=aria-label type="submit" value="Add">
+                    </md-input-container>
+                </form>
+
+            </div>
+        </md-content>
+    </md-dialog-content>
+
+</md-dialog>

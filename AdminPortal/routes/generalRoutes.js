@@ -67,8 +67,6 @@ router.post("/newCompany", function (req, res) {
         res.send(err);
     });
 });
-router.get("/userProfile", function (req, res) {
-});
 router.get("/getSalesmanInfo", function (req, res) {
     db_1.findSalesmen({ uniqueId: req.query.token })
         .then(function (data) {
@@ -109,14 +107,34 @@ router.get("/getUserDataAgain", function (req, res) {
         console.log(err);
     });
 });
-router.post("/salesmaLogin", function (req, res) {
+router.post("/salesmanLogin", function (req, res) {
     var user = req.body;
-    db_1.salesmanLogin({ email: req.body.email })
+    db_1.salesmenLogin({ id: user.id })
+        .then(function (data) {
+        if (!data) {
+            console.log("incorrect I.D");
+        }
+        else {
+            if (user.password == data.password) {
+                console.log("salesman login successfull");
+                res.send(data);
+            }
+            else {
+                console.log("incorrect password");
+            }
+        }
+    }, function (err) {
+        res.send(err);
+    });
+});
+router.post("/addProduct", function (req, res) {
+    console.log("product data ", req.body);
+    db_1.addProduct(req.body)
         .then(function (data) {
         console.log(data);
         res.send(data);
     }, function (err) {
-        res.send(err);
+        console.log(err);
     });
 });
 module.exports = router;

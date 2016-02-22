@@ -43,11 +43,17 @@ let addSalesmanSchema = new mongoose.Schema({
     uniqueId: {type: String}
 })
 
+let productsSchema = new mongoose.Schema({
+    name: {type: String},
+    price: {type: Number},
+    firebaseToken: {type: String};
+});
+
 
 let userModel = mongoose.model("users", userSchema);
 let companyModel = mongoose.model("companies", newCompanySchema);
 let addSalesmanModel = mongoose.model("salesmen", addSalesmanSchema);
-
+let addProductsModel = mongoose.model("products", productsSchema);
 
 function saveUser(args){
     let defferred = q.defer();
@@ -172,11 +178,26 @@ function salesmenLogin(arg){
         if(err){
             deferred.reject(err)
         }else{
-            deferred.reslove(data)
+            deferred.resolve(data)
         }
     })
     
-    return deferred.resolve;
+    return deferred.promise;
 }
 
-export {saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmanLogin}
+function addProduct(args){
+    let product = new addProductsModel(args);
+    let deferred = q.defer();
+    
+    product.save((err, data)=>{
+        if(err){
+            deferred.reject(err)
+        }else{
+            deferred.resolve(data)
+        }
+    })
+    
+    return deferred.promise;
+}
+
+export {saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmenLogin, addProduct}

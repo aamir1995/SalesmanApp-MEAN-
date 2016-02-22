@@ -1,5 +1,5 @@
 <div class="bar bar-header bar-positive">
-    <h1 class="title">Login</h1>
+    <h1 class="title">Login into your account</h1>
 </div>
 
 <br>
@@ -8,16 +8,16 @@
 <br>
 <br>
 
-<div class="list">
-    <form>
+<div class="list" ng-init="required=true">
+    <form name="form" novalidate>
         <label class="item item-input">
-            <input type="text" placeholder="I.D" ng-model="salesman.name" required>
+            <input type="text" placeholder="I.D" ng-model="salesman.id" ng-required="required">
         </label>
 
         <label class="item item-input">
-            <input type="text" placeholder="Password" ng-model="salesman.password" required>
+            <input type="text" placeholder="Password" ng-model="salesman.password" ng-required="required">
         </label>
 
-        <button type="submit" ng-click="login()" class="button button-block button-energized">Login</button>
+        <button type="submit" ng-click="login()" ng-disabled="form.$invalid" class="button button-block button-energized">Login</button>
     </form>
 </div>

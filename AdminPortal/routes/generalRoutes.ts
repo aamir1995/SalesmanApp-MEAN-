@@ -1,7 +1,7 @@
 /// <reference path = "../typings/tsd.d.ts" />
 
 import {
-    saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmanLogin
+    saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmenLogin, addProduct
 }
 from "../db/db";
 import express = require("express");
@@ -69,17 +69,13 @@ router.post("/newCompany", (req: express.Request, res: express.Response) => {
         .then((data) => {
             console.log(data, "successfully created your company");
             res.send(data);
-        }, (err) {
+        }, (err)=>{
             console.log(err, "error in creating company");
             res.send(err);
         });
 
 });
 
-router.get("/userProfile", (req: express.Request, res: express.Response) => {
-        
-
-});
 
 router.get("/getSalesmanInfo", (req: express.Request, res: express.Response)=>{
     findSalesmen({uniqueId: req.query.token})
@@ -130,17 +126,36 @@ router.get("/getUserDataAgain", (req: express.Request, res: express.Response)=>{
         })
 })
 
-router.post("/salesmaLogin", (req: express.Request, res: express.Response)=>{
+router.post("/salesmanLogin", (req: express.Request, res: express.Response)=>{
     let user = req.body
     
-    salesmanLogin({email : req.body.email})
+    salesmenLogin({id : user.id})
         .then((data)=>{
-            console.log(data)
-            res.send(data)
-        }, (err){
+            if(!data){
+                console.log("incorrect I.D")
+            }else{
+                if(user.password == data.password){
+                    console.log("salesman login successfull");
+                    res.send(data)
+                }else{
+                    console.log("incorrect password");
+                }
+            }
+        }, (err)=>{
             res.send(err)
         });
 })
     
+  router.post("/addProduct", (req: express.Request, res: express.Response)=>{
+      console.log("product data ", req.body);
+      
+      addProduct(req.body)
+        .then((data)=>{
+            console.log(data);
+            res.send(data);
+        }, (err)=>{
+            console.log(err);
+        });
+  })  
 
 module.exports = router;

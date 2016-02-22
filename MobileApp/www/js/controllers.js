@@ -1,17 +1,25 @@
 angular.module("starter")
 
-    .constant("ref", "localhost:8000")
+    .constant("ref", "http://localhost:8000")
 
-    .controller("loginController", function ($scope, $http, ref) {
+    .controller("loginController", function ($scope, $http, ref, $state) {
 
         $scope.login = function () {
-            console.log($http)
             $http.post(ref + "/api/salesmanLogin", $scope.salesman)
-                .success(function(data){
-                    console.log(data)
-                }, function(err){
-                    console.log(err)
+                .success(function (data) {
+                    if (data.uniqueId) {
+                        console.log(data);
+                        localStorage.setItem("token", data.uniqueId);
+                        $state.go("dashboard");
+                    }
+                })
+                .error(function (err) {
+                    console.log(err);
                 })
         }
 
-    });
+    })
+
+    .controller("dashboardController", function ($scope) {
+        $scope.greet = "dashboard";
+    })

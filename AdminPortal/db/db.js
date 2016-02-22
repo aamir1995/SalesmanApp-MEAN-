@@ -36,9 +36,15 @@ var addSalesmanSchema = new mongoose.Schema({
     password: { type: String },
     uniqueId: { type: String }
 });
+var productsSchema = new mongoose.Schema({
+    name: { type: String },
+    price: { type: Number },
+    firebaseToken: { type: String }
+});
 var userModel = mongoose.model("users", userSchema);
 var companyModel = mongoose.model("companies", newCompanySchema);
 var addSalesmanModel = mongoose.model("salesmen", addSalesmanSchema);
+var addProductsModel = mongoose.model("products", productsSchema);
 function saveUser(args) {
     var defferred = q.defer();
     var user = new userModel(args);
@@ -154,8 +160,23 @@ function salesmenLogin(arg) {
             deferred.reject(err);
         }
         else {
-            deferred.reslove(data);
+            deferred.resolve(data);
         }
     });
-    return deferred.resolve;
+    return deferred.promise;
 }
+exports.salesmenLogin = salesmenLogin;
+function addProduct(args) {
+    var product = new addProductsModel(args);
+    var deferred = q.defer();
+    product.save(function (err, data) {
+        if (err) {
+            deferred.reject(err);
+        }
+        else {
+            deferred.resolve(data);
+        }
+    });
+    return deferred.promise;
+}
+exports.addProduct = addProduct;

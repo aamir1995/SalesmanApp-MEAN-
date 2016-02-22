@@ -8,35 +8,56 @@
     </md-whiteframe>
 </div>
 
-<div ng-show="ifCompany" style="width:50%; margin:0 auto" layout="column" layout-padding layout-wrap layout-fill ng-cloak>
-    <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
-        <div>
-            <md-list ng-cloak>
-                <md-subheader class="md-no-sticky">Your Company Details.</md-subheader>
-                <md-divider></md-divider>
+<div layout="row">
+    <div ng-show="ifCompany" style="width:70%; margin:0 auto" layout="column" layout-padding layout-wrap layout-fill ng-cloak>
+        <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
+            <div>
+                <md-list ng-cloak>
+                    <md-subheader class="md-no-sticky">Your Company Details.</md-subheader>
+                    <md-divider></md-divider>
 
-                <md-list-item class="secondary-button-padding md-3-line">
-                    <img ng-src="" class="md-avatar" alt="" />
-                    <div class="md-list-item-text" layout="column">
-                        <h3>{{company.companyName}}</h3>
-                        <h4>{{company.products}}</h4>
-                        <p>{{company.address}}</p>
-                    </div>
-                </md-list-item>
-                <md-divider></md-divider>
-            </md-list>
+                    <md-list-item class="secondary-button-padding md-3-line">
+                        <img ng-src="" class="md-avatar" alt="" />
+                        <div class="md-list-item-text" layout="column">
+                            <h3>{{company.companyName}}</h3>
+                            <h4>{{company.products}}</h4>
+                            <p>{{company.address}}</p>
+                        </div>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </md-list>
 
-        </div>
-    </md-whiteframe>
+            </div>
+        </md-whiteframe>
+    </div>
+
+    <div ng-show="ifCompany" style="width:30%; margin:0 auto" layout="column" layout-padding layout-wrap layout-fill ng-cloak>
+        <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
+            <div>
+                <md-list ng-cloak>
+                    <md-subheader class="md-no-sticky">{{company.companyName}} Products details.</md-subheader>
+                    <md-divider></md-divider>
+
+                    <md-list-item class="secondary-button-padding md-3-line" layout-align="center">
+                        <md-button class="md-raised" ng-click="addProduct($event)">Add new product</md-button>
+                        <md-button class="md-raised">View all products</md-button>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </md-list>
+
+            </div>
+        </md-whiteframe>
+    </div>
 </div>
+
 
 <div ng-show="ifCompany" layout="column" style="width:100%; margin:0 auto" layout-padding layout-wrap layout-fill ng-cloak>
     <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
         <div>
             <md-list ng-cloak>
-                <div layout="row">                
-                <md-subheader class="md-no-sticky">Your Salesmen</md-subheader>
-                <md-progress-circular md-mode="indeterminate" ng-show="progress2"></md-progress-circular>
+                <div layout="row">
+                    <md-subheader class="md-no-sticky">Your Salesmen</md-subheader>
+                    <md-progress-circular md-mode="indeterminate" ng-show="progress2"></md-progress-circular>
                 </div>
                 <md-divider></md-divider>
 
@@ -54,8 +75,6 @@
     </md-whiteframe>
 </div>
 
-
 <md-button ng-show="ifCompany" style="position:fixed; bottom: 5;" class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)">
     Add
 </md-button>
-
