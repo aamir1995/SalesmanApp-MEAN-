@@ -40,7 +40,7 @@
 
                     <md-list-item class="secondary-button-padding md-3-line" layout-align="center">
                         <md-button class="md-raised" ng-click="addProduct($event)">Add new product</md-button>
-                        <md-button class="md-raised">View all products</md-button>
+                        <md-button class="md-raised" ui-sref="products">View all products</md-button>
                     </md-list-item>
                     <md-divider></md-divider>
                 </md-list>
@@ -75,6 +75,6 @@
     </md-whiteframe>
 </div>
 
-<md-button ng-show="ifCompany" style="position:fixed; bottom: 5;" class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)">
-    Add
+<md-button ng-show="ifCompany" style="position:fixed; bottom: 5;" class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)" aria-label="Add Salesman">
+    <ng-md-icon icon="add" style="fill: white"></ng-md-icon> 
 </md-button>

@@ -28,9 +28,14 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
                 controller: "newCompanyController",
                 loginRequired: true
             })
+            .state("products", {
+                url: "/products",
+                templateUrl: "./templates/viewProducts.html",
+                controller: "productsController"
+            })
         $urlRouterProvider.otherwise("/");
 
-        $httpProvider.interceptors.push("httpInterceptor");
+            $httpProvider.interceptors.push("httpInterceptor");
     })
 
     .run(function ($rootScope, $state) {

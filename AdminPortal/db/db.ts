@@ -200,4 +200,19 @@ function addProduct(args){
     return deferred.promise;
 }
 
-export {saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmenLogin, addProduct}
+function getProducts(args){
+    let deferred = q.defer();
+    
+    addProductsModel.find(args, (err, data)=>{
+        if(err){
+            deferred.reject(err);
+        }else{
+            deferred.resolve(data);
+        }
+        
+       
+    })
+     return deferred.promise;
+}
+
+export {saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmenLogin, addProduct, getProducts

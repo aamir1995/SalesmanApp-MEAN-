@@ -137,4 +137,13 @@ router.post("/addProduct", function (req, res) {
         console.log(err);
     });
 });
+router.get("/getProducts", function (req, res) {
+    db_1.getProducts({ firebaseToken: req.query.token })
+        .then(function (data) {
+        console.log(data);
+        res.send(data);
+    }, function (err) {
+        console.log(err);
+    });
+});
 module.exports = router;

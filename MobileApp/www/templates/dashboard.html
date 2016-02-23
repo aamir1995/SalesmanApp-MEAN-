@@ -1,1 +1,31 @@
-<h1>{{greet}}</h1>
+<ion-view title="Your Account">
+
+    <ion-content>
+        <div class="item item-avatar">
+            <img src="mcfly.jpg">
+            <h2>{{salesmanDetails.name}}</h2>
+            <p>company Name here</p>
+        </div>
+        <div class="card">
+            <div class="item item-text-wrap">
+                <button ui-sref="order" style="width:95%;display:block;margin:0 auto;" class="button button-block button-positive">
+                    Take Order
+                </button>
+            </div>
+
+            <div class="item item-text-wrap">
+                <button style="width:95%;display:block;margin:0 auto;" class="button button-block button-positive">
+                    View All Products
+                </button>
+            </div>
+
+            <div class="item item-text-wrap">
+                <button style="width:95%;display:block;margin:0 auto;" class="button button-block button-positive">
+                    Messages
+                </button>
+            </div>
+
+        </div>
+    </ion-content>
+
+</ion-view>

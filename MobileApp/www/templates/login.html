@@ -1,23 +1,18 @@
-<div class="bar bar-header bar-positive">
-    <h1 class="title">Login into your account</h1>
-</div>
+<ion-view title="Login">
 
-<br>
-<br>
-<br>
-<br>
-<br>
+    <ion-content ng-init="required=true">
+        <form ng-submit="login(salesman)" name="form" novalidate>
+            <label class="item item-input">
+                <input type="text" placeholder="I.D" ng-model="salesman.id" ng-required="required">
+            </label>
 
-<div class="list" ng-init="required=true">
-    <form name="form" novalidate>
-        <label class="item item-input">
-            <input type="text" placeholder="I.D" ng-model="salesman.id" ng-required="required">
-        </label>
+            <label class="item item-input">
+                <input type="password" placeholder="Password" ng-model="salesman.password" ng-required="required">
+            </label>
 
-        <label class="item item-input">
-            <input type="text" placeholder="Password" ng-model="salesman.password" ng-required="required">
-        </label>
+            <button type="submit" ng-disabled="form.$invalid" class="button button-block button-energized">Login</button>
+        </form>
 
-        <button type="submit" ng-click="login()" ng-disabled="form.$invalid" class="button button-block button-energized">Login</button>
-    </form>
-</div>
+    </ion-content>
+
+</ion-view>

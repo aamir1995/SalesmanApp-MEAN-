@@ -2,13 +2,16 @@ angular.module("starter")
 
     .constant("ref", "http://localhost:8000")
 
-    .controller("loginController", function ($scope, $http, ref, $state) {
+    .controller("loginController", function ($rootScope, $scope, $http, ref, $state) {
 
-        $scope.login = function () {
-            $http.post(ref + "/api/salesmanLogin", $scope.salesman)
+        $scope.login = function (salesman) {
+            console.log(salesman);
+            $http.post(ref + "/api/salesmanLogin", salesman)
                 .success(function (data) {
+
                     if (data.uniqueId) {
                         console.log(data);
+                        $rootScope.salesmanDetails = data;
                         localStorage.setItem("token", data.uniqueId);
                         $state.go("dashboard");
                     }
@@ -21,5 +24,24 @@ angular.module("starter")
     })
 
     .controller("dashboardController", function ($scope) {
-        $scope.greet = "dashboard";
+
+
+    })
+    
+    .controller("orderController", function(ref, $http, $scope){
+        
+         $http.get(ref + "/api/getProducts")
+                .success(function(data){
+                    console.log(data);
+                    $scope.products = data;
+                    //console.log($scope.products);
+                }, function(err){
+                    console.log(err);
+                }
+        )
+       
+       $scope.change1 = function(arg){
+           $scope.agr = arg;
+           console.log(arg);
+       }
     })

@@ -1,0 +1,24 @@
+<ion-view title="Take Order">
+
+    <ion-content>
+
+        <label class="item item-input item-select">
+            <div class="input-label">
+                Select Product
+            </div>
+            <select ng-change="change1(arg)" ng-model="arg">
+                <option></option>
+                <option ng-repeat="product in products">{{product.name}}</option>
+            </select>
+        </label>
+
+
+        <label class="item item-input">
+            <span class="input-label">Quantity</span>
+            <input style="margin-left:100px; padding: 0 70px" type="number">
+        </label>
+
+
+    </ion-content>
+
+</ion-view>

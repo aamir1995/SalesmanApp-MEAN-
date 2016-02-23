@@ -180,3 +180,16 @@ function addProduct(args) {
     return deferred.promise;
 }
 exports.addProduct = addProduct;
+function getProducts(args) {
+    var deferred = q.defer();
+    addProductsModel.find(args, function (err, data) {
+        if (err) {
+            deferred.reject(err);
+        }
+        else {
+            deferred.resolve(data);
+        }
+    });
+    return deferred.promise;
+}
+exports.getProducts = getProducts;

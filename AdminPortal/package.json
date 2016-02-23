@@ -19,6 +19,7 @@
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "firebase": "^2.4.0",
+    "material-design-lite": "^1.1.1",
     "mongoose": "^4.3.7",
     "nodemon": "^1.8.1",
     "path": "^0.12.7",

@@ -1,0 +1,20 @@
+<table style="width:100%;" class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+    <thead>
+        <tr>
+            <th class="mdl-data-table__cell--non-numeric">Product Name</th>
+            <th>Price (each)</th>
+            <th>Remove Product</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="product in products">
+            <td class="mdl-data-table__cell--non-numeric">{{product.name}}</td>
+            <td>Rs. {{product.price}}</td>
+            <td>
+                <md-button class="md-icon-button" aria-label="delete">
+                    <ng-md-icon icon="delete" style="fill: #3F51B5"></ng-md-icon>
+                </md-button>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -201,3 +201,15 @@ angular.module("app")
             })
                 
         }})
+        
+        .controller("productsController", function($scope, $http){
+            $http.get("api/getProducts")
+                .success(function(data){
+                    console.log(data);
+                    $scope.products = data;
+                    console.log($scope.products);
+                }, function(err){
+                    console.log(err);
+                }
+        )
+        })
