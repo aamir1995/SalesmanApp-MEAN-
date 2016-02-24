@@ -1,5 +1,5 @@
 
-angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
+angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons', 'firebase'])
 
     .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -32,6 +32,11 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons'])
                 url: "/products",
                 templateUrl: "./templates/viewProducts.html",
                 controller: "productsController"
+            })
+            .state("orders", {
+                url: "/orders",
+                templateUrl: "./templates/orders.html",
+                controller: "ordersController"
             })
         $urlRouterProvider.otherwise("/");
 

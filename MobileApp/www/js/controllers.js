@@ -27,21 +27,35 @@ angular.module("starter")
 
 
     })
-    
-    .controller("orderController", function(ref, $http, $scope){
-        
-         $http.get(ref + "/api/getProducts")
-                .success(function(data){
-                    console.log(data);
-                    $scope.products = data;
-                    //console.log($scope.products);
-                }, function(err){
-                    console.log(err);
-                }
-        )
-       
-       $scope.change1 = function(arg){
-           $scope.agr = arg;
-           console.log(arg);
-       }
+
+    .controller("orderController", function (ref, $http, $scope, $firebaseArray) {
+
+        var fireRef = new Firebase("https://salesmanapp101.firebaseio.com/")
+
+        $scope.orders = $firebaseArray(fireRef);
+
+
+        $http.get(ref + "/api/getProducts")
+            .success(function (data) {
+                console.log(data);
+                $scope.products = data;
+                //console.log($scope.products);
+            }, function (err) {
+                console.log(err);
+            }
+                )
+
+        // $scope.change1 = function (arg) {
+        //     $scope.agr = arg;
+        //     console.log(arg);
+        // }
+
+        // Save order to firebase
+        $scope.takeOrder = function (arg) {
+            $scope.orders.$add({
+                name: arg.name,
+                quantity: arg.quantity
+            })
+        }
+
     })

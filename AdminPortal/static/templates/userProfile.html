@@ -48,8 +48,32 @@
             </div>
         </md-whiteframe>
     </div>
-</div>
 
+
+
+    <div ng-show="ifCompany" style="width:30%; margin:0 auto" layout="column" layout-padding layout-wrap layout-fill ng-cloak>
+        <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
+            <div>
+                <md-list ng-cloak>
+                    <md-subheader class="md-no-sticky">{{company.companyName}}'s recieved order details.</md-subheader>
+                    <md-divider></md-divider>
+
+                    <md-list-item class="secondary-button-padding md-3-line" layout-align="center">
+                        <md-button class="md-raised" ui-sref="orders">New Orders
+                            <md-icon ng-if="orders.length" style="background-color:#E50000;border-radius:18px">
+                                <p style="color:white;"><b>{{orders.length}}</b></p>
+                            </md-icon>
+                        </md-button>
+                        <md-button class="md-raised">Order History</md-button>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </md-list>
+
+            </div>
+        </md-whiteframe>
+    </div>
+</div>
+</div>
 
 <div ng-show="ifCompany" layout="column" style="width:100%; margin:0 auto" layout-padding layout-wrap layout-fill ng-cloak>
     <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
@@ -75,6 +99,7 @@
     </md-whiteframe>
 </div>
 
-<md-button ng-show="ifCompany" style="position:fixed; bottom: 5;" class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)" aria-label="Add Salesman">
-    <ng-md-icon icon="add" style="fill: white"></ng-md-icon> 
+<md-button ng-show="ifCompany" style="position:fixed; bottom: 5;" class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)"
+aria-label="Add Salesman">
+    <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
 </md-button>
