@@ -229,10 +229,10 @@ angular.module("app")
                 console.log(data);
                 $scope.products = data;
                 console.log($scope.products);
-            }, function (err) {
+            })
+            .error(function (err) {
                 console.log(err);
-            }
-                )
+            })
     })
 
     .controller("ordersController", function ($scope, $http, fireRef, $firebaseArray) {
@@ -246,8 +246,10 @@ angular.module("app")
             $http.post("api/orders", $scope.orders[index])
                 .success(function (data) {
                     console.log(data)
-                    //$rootScope.orders.$remove()
-                }, function (err) {
+                    console.log("hello")
+                    $scope.orders.$remove(index);
+                })
+                .error(function (err) {
                     console.log(err)
                 })
         }

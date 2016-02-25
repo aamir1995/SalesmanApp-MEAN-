@@ -151,6 +151,7 @@ router.post("/orders", function (req, res) {
     db_1.saveOrder(req.body)
         .then(function (data) {
         console.log("order", data);
+        res.send(data);
     }, function (err) {
         console.log(err);
     });

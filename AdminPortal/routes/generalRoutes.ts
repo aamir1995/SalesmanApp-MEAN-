@@ -172,8 +172,9 @@ router.post("/salesmanLogin", (req: express.Request, res: express.Response)=>{
   router.post("/orders", (req: express.Request, res: express.Response)=>{
       console.log(req.body)
       saveOrder(req.body)
-        .then((data)=>{
+        .then((data)=>{           
             console.log("order", data);
+            res.send(data)
         }, (err)=>{
             console.log(err)
         })
