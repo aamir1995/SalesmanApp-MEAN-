@@ -8,7 +8,6 @@ angular.module("starter")
             console.log(salesman);
             $http.post(ref + "/api/salesmanLogin", salesman)
                 .success(function (data) {
-
                     if (data.uniqueId) {
                         console.log(data);
                         $rootScope.salesmanDetails = data;
@@ -28,7 +27,7 @@ angular.module("starter")
 
     })
 
-    .controller("orderController", function (ref, $http, $scope, $firebaseArray) {
+    .controller("orderController", function (ref, $http, $scope, $rootScope, $firebaseArray) {
 
         var fireRef = new Firebase("https://salesmanapp101.firebaseio.com/")
 
@@ -40,11 +39,11 @@ angular.module("starter")
             .success(function (data) {
                 console.log(data);
                 $scope.products = data;
-                //console.log($scope.products);
             }, function (err) {
                 console.log(err);
             }
                 )
+                
 
         // $scope.change1 = function (arg) {
         //     $scope.agr = arg;
@@ -53,20 +52,15 @@ angular.module("starter")
 
         // Save order to firebase
         $scope.takeOrder = function (arg) {
+            
+            console.log(Firebase.ServerValue.TIMESTAMP);
             $scope.orders.$add({
                 name: arg.name,
-                quantity: arg.quantity
+                quantity: arg.quantity,
+                sentBy: $rootScope.salesmanDetails.name,
+                firebaseToken: localStorage.getItem("token"),
+                recievedOn: Firebase.ServerValue.TIMESTAMP,
             })
-        }
-        
-        // Save to order to MongoDB and remove it from Firebase
-        $scope.sendDelivery = function () {
-            $http.post(ref + "/api/order", $scope.orders)
-                .success(function (data) {
-                    console.log(data)
-                }, function (err) {
-                    console.log(err)
-                })
         }
 
     })

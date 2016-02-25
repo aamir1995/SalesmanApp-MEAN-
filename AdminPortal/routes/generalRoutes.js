@@ -147,7 +147,6 @@ router.get("/getProducts", function (req, res) {
     });
 });
 router.post("/orders", function (req, res) {
-    console.log(req.body);
     db_1.saveOrder(req.body)
         .then(function (data) {
         console.log("order", data);

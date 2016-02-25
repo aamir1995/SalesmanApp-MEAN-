@@ -246,7 +246,6 @@ angular.module("app")
             $http.post("api/orders", $scope.orders[index])
                 .success(function (data) {
                     console.log(data)
-                    console.log("hello")
                     $scope.orders.$remove(index);
                 })
                 .error(function (err) {

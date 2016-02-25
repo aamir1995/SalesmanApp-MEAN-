@@ -71,13 +71,11 @@ function saveUser(args){
     user.save((err, data)=>{
         if(err){
             console.log(err);
-            defferred.reject("error");
-           
+            defferred.reject("error");           
         } else {
             console.log("succesfully added (db)");
             defferred.resolve(data);
-        }
-       
+        }       
     })
      return defferred.promise;
 }
