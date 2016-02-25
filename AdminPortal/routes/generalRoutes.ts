@@ -1,7 +1,7 @@
 /// <reference path = "../typings/tsd.d.ts" />
 
 import {
-    saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmenLogin, addProduct, getProducts
+    saveUser, login, createCompany, findCompany, addSalesman, findSalesmen, getDataAgain, salesmenLogin, addProduct, getProducts, saveOrder
 }
 from "../db/db";
 import express = require("express");
@@ -167,6 +167,17 @@ router.post("/salesmanLogin", (req: express.Request, res: express.Response)=>{
         }, (err)=>{
             console.log(err);
         })
+  })
+  
+  router.post("/orders", (req: express.Request, res: express.Response)=>{
+      console.log(req.body)
+      saveOrder(req.body)
+        .then((data)=>{
+            console.log("order", data);
+        }, (err)=>{
+            console.log(err)
+        })
+      
   })
 
 module.exports = router;

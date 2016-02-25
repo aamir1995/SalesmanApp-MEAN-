@@ -61,7 +61,8 @@ angular.module("app")
     .controller("userProfileController", function ($scope, $rootScope, getCompanyService, getSalesmenInfo, $mdDialog, $mdMedia, $http, fireRef, $firebaseArray) {
         var fireRef = new Firebase(fireRef);
 
-        $rootScope.orders = $firebaseArray(fireRef)
+        $scope.token = localStorage.getItem("token");
+        $scope.orders = $firebaseArray(fireRef.child($scope.token));
         // $scope.orders.$loaded(function () {
         //     console.log($scope.orders);
         //     console.log($scope.orders.length);
@@ -234,6 +235,20 @@ angular.module("app")
                 )
     })
 
-    .controller("ordersController", function ($scope) {
+    .controller("ordersController", function ($scope, $http, fireRef, $firebaseArray) {
+        var fireRef = new Firebase(fireRef);
 
+        $scope.token = localStorage.getItem("token");
+        $scope.orders = $firebaseArray(fireRef.child($scope.token));
+
+        // Save to order to MongoDB and remove it from Firebase    
+        $scope.sendDelivery = function (index) {
+            $http.post("api/orders", $scope.orders[index])
+                .success(function (data) {
+                    console.log(data)
+                    //$rootScope.orders.$remove()
+                }, function (err) {
+                    console.log(err)
+                })
+        }
     })

@@ -25,6 +25,18 @@
     },
     "q/Q.d.ts": {
       "commit": "6d3c9f422fe385f4f34d3be4c7920476163c87ec"
+    },
+    "firebase/firebase.d.ts": {
+      "commit": "dade4414712ce84e3c63393f1aae407e9e7e6af7"
+    },
+    "angularfire/angularfire.d.ts": {
+      "commit": "dade4414712ce84e3c63393f1aae407e9e7e6af7"
+    },
+    "angularjs/angular.d.ts": {
+      "commit": "dade4414712ce84e3c63393f1aae407e9e7e6af7"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "dade4414712ce84e3c63393f1aae407e9e7e6af7"
     }
   }
 }

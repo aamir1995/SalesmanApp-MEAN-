@@ -146,4 +146,13 @@ router.get("/getProducts", function (req, res) {
         console.log(err);
     });
 });
+router.post("/orders", function (req, res) {
+    console.log(req.body);
+    db_1.saveOrder(req.body)
+        .then(function (data) {
+        console.log("order", data);
+    }, function (err) {
+        console.log(err);
+    });
+});
 module.exports = router;

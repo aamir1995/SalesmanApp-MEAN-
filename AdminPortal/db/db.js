@@ -41,10 +41,19 @@ var productsSchema = new mongoose.Schema({
     price: { type: Number },
     firebaseToken: { type: String }
 });
+var orderSchema = new mongoose.Schema({
+    name: String,
+    quantity: Number,
+    sentBy: String,
+    recievedOn: { type: Date },
+    deliveredOn: { type: Date, default: Date.now() },
+    firebaseToken: String
+});
 var userModel = mongoose.model("users", userSchema);
 var companyModel = mongoose.model("companies", newCompanySchema);
 var addSalesmanModel = mongoose.model("salesmen", addSalesmanSchema);
 var addProductsModel = mongoose.model("products", productsSchema);
+var orderModel = mongoose.model("orders", orderSchema);
 function saveUser(args) {
     var defferred = q.defer();
     var user = new userModel(args);
@@ -193,3 +202,17 @@ function getProducts(args) {
     return deferred.promise;
 }
 exports.getProducts = getProducts;
+function saveOrder(args) {
+    var order = new orderModel(args);
+    var deferred = q.defer();
+    order.save(function (err, data) {
+        if (err) {
+            deferred.reject(err);
+        }
+        else {
+            deferred.resolve(data);
+        }
+    });
+    return deferred.promise;
+}
+exports.saveOrder = saveOrder;

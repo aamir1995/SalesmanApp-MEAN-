@@ -32,7 +32,8 @@ angular.module("starter")
 
         var fireRef = new Firebase("https://salesmanapp101.firebaseio.com/")
 
-        $scope.orders = $firebaseArray(fireRef);
+        $scope.token = localStorage.getItem("token");
+        $scope.orders = $firebaseArray(fireRef.child($scope.token));
 
 
         $http.get(ref + "/api/getProducts")
@@ -56,6 +57,16 @@ angular.module("starter")
                 name: arg.name,
                 quantity: arg.quantity
             })
+        }
+        
+        // Save to order to MongoDB and remove it from Firebase
+        $scope.sendDelivery = function () {
+            $http.post(ref + "/api/order", $scope.orders)
+                .success(function (data) {
+                    console.log(data)
+                }, function (err) {
+                    console.log(err)
+                })
         }
 
     })

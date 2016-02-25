@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="order in orders">
+        <tr ng-repeat="order in orders track by $index">
             <td class="mdl-data-table__cell--non-numeric">{{order.name}}</td>
             <td>{{order.quantity}}</td>
             <td></td>
@@ -20,7 +20,7 @@
             </td>
 
             <td>
-                <md-button class="md-icon-button" aria-label="delete">
+                <md-button class="md-icon-button" aria-label="send delivery" ng-click="sendDelivery($index)">
                     <ng-md-icon icon="done" style="fill: #3F51B5"></ng-md-icon>
                 </md-button>
             </td>
