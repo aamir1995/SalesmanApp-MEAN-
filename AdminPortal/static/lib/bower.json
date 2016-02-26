@@ -1,0 +1,21 @@
+{
+  "name": "lib",
+  "homepage": "https://github.com/Aamir-Shah/SalesmanApp-MEAN-",
+  "authors": [
+    "AamirShah <syedaamir974@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-leaflet-directive": "^0.10.0"
+  }
+}

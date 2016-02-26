@@ -27,7 +27,7 @@ angular.module("starter")
 
     })
 
-    .controller("orderController", function (ref, $http, $scope, $rootScope, $firebaseArray) {
+    .controller("orderController", function (ref, $http, $scope, $rootScope, $firebaseArray, $cordovaGeolocation) {
 
         var fireRef = new Firebase("https://salesmanapp101.firebaseio.com/")
 
@@ -43,24 +43,34 @@ angular.module("starter")
                 console.log(err);
             }
                 )
-                
 
-        // $scope.change1 = function (arg) {
-        //     $scope.agr = arg;
-        //     console.log(arg);
-        // }
+        var posOptions = { timeout: 10000, enableHighAccuracy: false };
 
-        // Save order to firebase
+        // Save order and Salesman Location to firebase
         $scope.takeOrder = function (arg) {
-            
-            console.log(Firebase.ServerValue.TIMESTAMP);
-            $scope.orders.$add({
-                name: arg.name,
-                quantity: arg.quantity,
-                sentBy: $rootScope.salesmanDetails.name,
-                firebaseToken: localStorage.getItem("token"),
-                recievedOn: Firebase.ServerValue.TIMESTAMP,
-            })
+
+            $cordovaGeolocation
+                .getCurrentPosition(posOptions)
+                .then(function (position) {
+                    $scope.lat = position.coords.latitude
+                    $scope.lng = position.coords.longitude;
+
+                    $scope.orders.$add({
+                        name: arg.name,
+                        quantity: arg.quantity,
+                        sentBy: $rootScope.salesmanDetails.name,
+                        firebaseToken: localStorage.getItem("token"),
+                        recievedOn: Firebase.ServerValue.TIMESTAMP,
+                        lat: $scope.lat,
+                        lng: $scope.lng
+                    })
+
+                }, function (err) {
+                    console.log(err);
+                });
+
+
+
         }
 
     })

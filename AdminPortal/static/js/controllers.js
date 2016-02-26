@@ -253,3 +253,28 @@ angular.module("app")
                 })
         }
     })
+
+    .controller('locationController', function ($scope) {
+        console.log("hollaaaa")
+        angular.extend($scope, {
+            center: {
+                lat: 24.813565200000003,
+                lng: 67.04839439999999,
+                zoom: 20
+            },
+            markers: {
+                marker: {
+                    lat: 24.813565200000003,
+                    lng: 67.04839439999999,
+                    message: "Order Location",
+                    focus: true,
+                    draggable: false
+                }
+            },
+            defaults: {
+                scrollWheelZoom: false
+            }
+        })
+
+
+    })
