@@ -1,0 +1,92 @@
+{
+  "_args": [
+    [
+      "leaflet-plugins",
+      "d:\\MEAN Projects\\SalesmanApp-MEAN-\\AdminPortal"
+    ]
+  ],
+  "_from": "leaflet-plugins@latest",
+  "_id": "leaflet-plugins@1.4.3",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/leaflet-plugins",
+  "_nodeVersion": "0.12.9",
+  "_npmUser": {
+    "email": "brunobergot@gmail.com",
+    "name": "b_b"
+  },
+  "_npmVersion": "2.14.9",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "leaflet-plugins",
+    "raw": "leaflet-plugins",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/leaflet-plugins/-/leaflet-plugins-1.4.3.tgz",
+  "_shasum": "26efc802c0af134c225d79ba018dad39c5eada40",
+  "_shrinkwrap": null,
+  "_spec": "leaflet-plugins",
+  "_where": "d:\\MEAN Projects\\SalesmanApp-MEAN-\\AdminPortal",
+  "author": {
+    "name": "Pavel Shramov"
+  },
+  "bugs": {
+    "url": "https://github.com/shramov/leaflet-plugins/issues"
+  },
+  "contributors": [
+    {
+      "name": "Bruno Bergot",
+      "email": "bruno@eliaz.fr"
+    }
+  ],
+  "dependencies": {},
+  "description": "Miscellaneous plugins for Leaflet library for services that need to display route information and need satellite imagery from different providers",
+  "devDependencies": {
+    "jshint": "2.5.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "26efc802c0af134c225d79ba018dad39c5eada40",
+    "tarball": "http://registry.npmjs.org/leaflet-plugins/-/leaflet-plugins-1.4.3.tgz"
+  },
+  "gitHead": "6d2f274be0855f1825812d5d47b301d152b33542",
+  "homepage": "https://github.com/shramov/leaflet-plugins#readme",
+  "keywords": [
+    "bing",
+    "google",
+    "gpx",
+    "kml",
+    "leaflet",
+    "map",
+    "plugins",
+    "yandex"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "lushchick",
+      "email": "a.lushchick@gmail.com"
+    },
+    {
+      "name": "b_b",
+      "email": "brunobergot@gmail.com"
+    }
+  ],
+  "name": "leaflet-plugins",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/shramov/leaflet-plugins.git"
+  },
+  "scripts": {
+    "test": "jshint control/* layer/*"
+  },
+  "version": "1.4.3"
+}

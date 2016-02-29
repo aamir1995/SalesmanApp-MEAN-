@@ -39,7 +39,7 @@ angular.module("app", ['ui.router', 'ngMaterial', 'ngMdIcons', 'firebase', 'leaf
                 controller: "ordersController"
             })
             .state("location", {
-                url: "/location",
+                url: "/location/:lat/:lng",
                 templateUrl: "./templates/location.html",
                 controller: "locationController"
             })

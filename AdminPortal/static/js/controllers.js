@@ -235,7 +235,7 @@ angular.module("app")
             })
     })
 
-    .controller("ordersController", function ($scope, $http, fireRef, $firebaseArray) {
+    .controller("ordersController", function ($scope, $http, fireRef, $firebaseArray, $state) {
         var fireRef = new Firebase(fireRef);
 
         $scope.token = localStorage.getItem("token");
@@ -252,29 +252,51 @@ angular.module("app")
                     console.log(err)
                 })
         }
+
+
     })
 
-    .controller('locationController', function ($scope) {
-        console.log("hollaaaa")
+    .controller('locationController', function ($scope, $state, $stateParams) {
+
+        $scope.lat = $stateParams.lat * 1;
+        $scope.lng = $stateParams.lng * 1;
+
+
         angular.extend($scope, {
             center: {
-                lat: 24.813565200000003,
-                lng: 67.04839439999999,
+                lat: $scope.lat,
+                lng: $scope.lng,
                 zoom: 20
             },
             markers: {
                 marker: {
-                    lat: 24.813565200000003,
-                    lng: 67.04839439999999,
+                    lat: $scope.lat,
+                    lng: $scope.lng,
                     message: "Order Location",
                     focus: true,
                     draggable: false
+                }},
+                layers: {
+                    baselayers: {
+                        googleTerrain: {
+                            name: 'Google Terrain',
+                            layerType: 'TERRAIN',
+                            type: 'google'
+                        },
+                        googleHybrid: {
+                            name: 'Google Hybrid',
+                            layerType: 'HYBRID',
+                            type: 'google'
+                        },
+                        googleRoadmap: {
+                            name: 'Google Streets',
+                            layerType: 'ROADMAP',
+                            type: 'google'
+                        }
+                    }
+                },
+                defaults: {
+                    scrollWheelZoom: false
                 }
-            },
-            defaults: {
-                scrollWheelZoom: false
-            }
-        })
-
-
+            })
     })

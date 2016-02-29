@@ -15,8 +15,8 @@
             <td>{{order.quantity}}</td>
             <td>{{order.sentBy}}</td>
             <td>{{order.recievedOn | date:"dd/MM/yyyy 'at' h:mma"}}</td>
-            <td>
-                <md-button class="md-icon-button" aria-label="view location" ui-sref="location">
+            <td ui-sref=' location({ lat: order.lat, lng:order.lng })'>
+                <md-button class="md-icon-button" aria-label="view location">
                     <ng-md-icon icon="location_on" style="fill: #3F51B5"></ng-md-icon>
                 </md-button>
             </td>
