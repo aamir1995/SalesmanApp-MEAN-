@@ -17,7 +17,7 @@
                     <md-divider></md-divider>
 
                     <md-list-item class="secondary-button-padding md-3-line">
-                        <img ng-src="" class="md-avatar" alt="" />
+                        <img ng-src="../images/default_company_avatar.png" class="md-avatar" alt="company logo" />
                         <div class="md-list-item-text" layout="column">
                             <h3>{{company.companyName}}</h3>
                             <h4>{{company.products}}</h4>
@@ -55,7 +55,7 @@
         <md-whiteframe class="md-whiteframe-1dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25">
             <div>
                 <md-list ng-cloak>
-                    <md-subheader class="md-no-sticky">{{company.companyName}}'s recieved order details.</md-subheader>
+                    <md-subheader class="md-no-sticky">Recieved order details.</md-subheader>
                     <md-divider></md-divider>
 
                     <md-list-item class="secondary-button-padding md-3-line" layout-align="center">
@@ -86,7 +86,7 @@
                 <md-divider></md-divider>
 
                 <md-list-item class="md-2-line" ng-repeat="salesmen in allSalesmen">
-                    <img ng-src="" class="md-avatar" alt="" />
+                    <img ng-src="../images/default_avatar.png" class="md-avatar" alt="user avatar" />
                     <div class="md-list-item-text">
                         <h3>{{salesmen.name}}</h3>
                         <p>{{salesmen.region}}</p>

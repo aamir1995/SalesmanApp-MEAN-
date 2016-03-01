@@ -21,8 +21,12 @@ angular.module("app")
                         localStorage.setItem('token', response.token);
                         $scope.progress1 = false;
                         $state.go("userProfile");
-                        toastService.showSimpleToast()
-
+                        toastService.showSimpleToast('You are Logged in')
+                    }
+                    else{
+                    $scope.progress1 = false;
+                    toastService.showSimpleToast('Invalid User Name or Password')
+                    $state.go("/login");
                     }
                 })
                 .error(function (err) {
@@ -43,7 +47,7 @@ angular.module("app")
             $scope.progress2 = true;
             $http.post("api/signup", { data: $scope.user })
                 .success(function (data) {
-                    toastService.showSimpleToast()
+                    toastService.showSimpleToast('successfully created your Account')
                     console.log(data);
                     console.log("successfully added (index.js)")
                     $scope.progress2 = false;
@@ -58,41 +62,15 @@ angular.module("app")
     })
 
 
-    .controller("userProfileController", function ($scope, $rootScope, getCompanyService, getSalesmenInfo, $mdDialog, $mdMedia, $http, fireRef, $firebaseArray) {
+    .controller("userProfileController", function ($scope, $rootScope, getCompanyService, getSalesmenInfo, $mdDialog, $mdMedia, $http, fireRef, $firebaseArray, getUserName) {
+        getUserName.getCurrentUser();        
+        $rootScope.currentUser = localStorage.getItem('currentUser');      
+           
         var fireRef = new Firebase(fireRef);
 
         $scope.token = localStorage.getItem("token");
         $scope.orders = $firebaseArray(fireRef.child($scope.token));
-        // $scope.orders.$loaded(function () {
-        //     console.log($scope.orders);
-        //     console.log($scope.orders.length);
-        //     alert("order recieved")
-        // })
-
-        //     $scope.showActionToast = function () {
-        //         var toast = $mdToast.simple()
-        //             .textContent('Action Toast!')
-        //             .action('OK')
-        //             .highlightAction(false)
-        //             .position($scope.getToastPosition());
-        //         $mdToast.show(toast).then(function (response) {
-        //             if (response == 'ok') {
-        //                 alert('You clicked \'OK\'.');
-        //             }
-        //         });
-        //     };
-        // })
-
-
-        $http.get("api/getUserDataAgain")
-            .success(function (response) {
-                console.log(response);
-                $rootScope.currentUser = response;
-
-            }, function (err) {
-                console.log(err);
-            });
-
+      
 
 
         $rootScope.headerElements = false;
@@ -139,12 +117,13 @@ angular.module("app")
                 $scope.salesman.uniqueId = localStorage.getItem("token");
                 $http.post("api/newSalesman", $scope.salesman)
                     .success(function () {
-                        toastService.showSimpleToast()
+                        toastService.showSimpleToast('New salesman created successfully')
                         $mdDialog.hide();
                         $state.go($state.current, {}, { reload: true })
-
                     })
             }
+
+            
             $scope.hide = function () {
                 $mdDialog.hide();
             };
@@ -188,8 +167,7 @@ angular.module("app")
                         console.log(err);
                     })
             }
-
-
+            
             $scope.hide = function () {
                 $mdDialog.hide();
             };
@@ -202,7 +180,8 @@ angular.module("app")
     })
 
 
-    .controller("newCompanyController", function ($scope, $http, $state, toastService) {
+    .controller("newCompanyController", function ($scope, $rootScope, $http, $state, toastService) {
+
         $scope.token = localStorage.getItem("token");
         $scope.companyInfo = {};
         $scope.companyInfo.adminId = $scope.token;
@@ -212,7 +191,7 @@ angular.module("app")
         $scope.createCompany = function () {
             $http.post("api/newCompany", $scope.companyInfo)
                 .then(function (data) {
-                    toastService.showSimpleToast()
+                    toastService.showSimpleToast('Successfully created your Company')
                     console.log(data + "from newCompanyController");
                     $state.go("userProfile")
 
@@ -223,7 +202,12 @@ angular.module("app")
         }
     })
 
-    .controller("productsController", function ($scope, $http) {
+    .controller("productsController", function ($scope, $rootScope, $http, getUserName) {
+        getUserName.getCurrentUser();        
+        $rootScope.currentUser = localStorage.getItem('currentUser');      
+        
+        $rootScope.currentUser = $rootScope.currentUser
+        $rootScope.headerElements = false;
         $http.get("api/getProducts")
             .success(function (data) {
                 console.log(data);
@@ -235,7 +219,12 @@ angular.module("app")
             })
     })
 
-    .controller("ordersController", function ($scope, $http, fireRef, $firebaseArray, $state) {
+    .controller("ordersController", function ($scope, $rootScope, $http, fireRef, $firebaseArray, $state, getUserName, toastService) {
+        getUserName.getCurrentUser();        
+        $rootScope.currentUser = localStorage.getItem('currentUser');      
+        
+    $rootScope.currentUser = $rootScope.currentUser
+        $rootScope.headerElements = false;
         var fireRef = new Firebase(fireRef);
 
         $scope.token = localStorage.getItem("token");
@@ -246,6 +235,7 @@ angular.module("app")
             $http.post("api/orders", $scope.orders[index])
                 .success(function (data) {
                     console.log(data)
+                    toastService.showSimpleToast('Operation Successfull');
                     $scope.orders.$remove(index);
                 })
                 .error(function (err) {
@@ -256,7 +246,9 @@ angular.module("app")
 
     })
 
-    .controller('locationController', function ($scope, $state, $stateParams) {
+    .controller('locationController', function ($scope, $rootScope, $state, $stateParams, getUserName) {
+        getUserName.getCurrentUser();        
+        $rootScope.currentUser = localStorage.getItem('currentUser');      
 
         $scope.lat = $stateParams.lat * 1;
         $scope.lng = $stateParams.lng * 1;
