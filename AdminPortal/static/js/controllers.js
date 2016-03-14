@@ -2,17 +2,17 @@ angular.module("app")
 
     .constant("fireRef", 'https://salesmanapp101.firebaseio.com/')
 
+// #### Index.html Controller ####
     .controller("indexController", function ($rootScope, $scope) {
-
         $rootScope.headerName = "Salesman App";
         $rootScope.headerElements = true;
-
     })
 
+
+// #### login.html Controller ####
     .controller("loginController", function ($rootScope, $scope, $http, $state, toastService) {
         $scope.progress1 = false;
         $scope.user = {};
-
         $scope.login = function () {
             $scope.progress1 = true;
             $http.post("api/login", { data: $scope.user })
@@ -40,6 +40,7 @@ angular.module("app")
     })
 
 
+// #### signup.html Controller ####
     .controller("signupController", function ($scope, $http, $state, toastService) {
         $scope.progress2 = false;
         $scope.user = {};
@@ -62,6 +63,7 @@ angular.module("app")
     })
 
 
+// #### userprofile.html Controller ####
     .controller("userProfileController", function ($scope, $rootScope, getCompanyService, getSalesmenInfo, $mdDialog, $mdMedia, $http, fireRef, $firebaseArray, getUserName) {
         getUserName.getCurrentUser();        
         $rootScope.currentUser = localStorage.getItem('currentUser');      
@@ -81,13 +83,12 @@ angular.module("app")
             }, function (error) {
                 console.log(error);
             })
-
-
+        
         getSalesmenInfo.getSalesmanData()
             .then(function (response) {
                 console.log(response.data)
                 $scope.allSalesmen = response.data;
-                console.log($scope.allSalesmen)
+               console.log($scope.allSalesmen)
             }, function (error) {
                 console.log(error);
             })
@@ -175,11 +176,23 @@ angular.module("app")
                 $mdDialog.cancel();
             };
         }
-
-
+        
+        $scope.exInfo = true;
+        
+        $scope.clickIcon = 'expand_more';
+        
+        $scope.clickToMorph = function (index) {
+                    if($scope.allSalesmen[index].more){
+                   $scope.allSalesmen[index].more = null;                  
+              }else{
+                   $scope.allSalesmen[index].more = 'expand_less';
+              }        
+        }
+     
     })
-
-
+    
+    
+// #### company.html Controller ####
     .controller("newCompanyController", function ($scope, $rootScope, $http, $state, toastService) {
 
         $scope.token = localStorage.getItem("token");
@@ -202,6 +215,8 @@ angular.module("app")
         }
     })
 
+
+// #### viewProducts.html Controller ####
     .controller("productsController", function ($scope, $rootScope, $http, getUserName) {
         getUserName.getCurrentUser();        
         $rootScope.currentUser = localStorage.getItem('currentUser');      
@@ -219,6 +234,8 @@ angular.module("app")
             })
     })
 
+
+// #### orders.html Controller ####
     .controller("ordersController", function ($scope, $rootScope, $http, fireRef, $firebaseArray, $state, getUserName, toastService) {
         getUserName.getCurrentUser();        
         $rootScope.currentUser = localStorage.getItem('currentUser');      
@@ -242,17 +259,16 @@ angular.module("app")
                     console.log(err)
                 })
         }
-
-
     })
 
+
+// #### location.html Controller ####
     .controller('locationController', function ($scope, $rootScope, $state, $stateParams, getUserName) {
         getUserName.getCurrentUser();        
         $rootScope.currentUser = localStorage.getItem('currentUser');      
 
         $scope.lat = $stateParams.lat * 1;
         $scope.lng = $stateParams.lng * 1;
-
 
         angular.extend($scope, {
             center: {

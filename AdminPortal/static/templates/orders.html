@@ -14,8 +14,8 @@
             <td class="mdl-data-table__cell--non-numeric">{{order.name}}</td>
             <td>{{order.quantity}}</td>
             <td>{{order.sentBy}}</td>
-            <td>{{order.recievedOn | date:"dd/MM/yyyy 'at' h:mma"}}</td>
-            <td ui-sref=' location({ lat: order.lat, lng:order.lng })'>
+            <td>{{order.recievedOn | date:"dd/MM/yyyy 'at' h:mm a"}}</td>
+            <td ui-sref='location({ lat: order.lat, lng:order.lng })'>
                 <md-button class="md-icon-button" aria-label="view location">
                     <ng-md-icon icon="location_on" style="fill: #3F51B5"></ng-md-icon>
                 </md-button>

@@ -19,7 +19,7 @@
                     <md-list-item class="secondary-button-padding md-3-line">
                         <img ng-src="../images/default_company_avatar.png" class="md-avatar" alt="company logo" />
                         <div class="md-list-item-text" layout="column">
-                            <h3>{{company.companyName}}</h3>
+                            <h3><b>{{company.companyName}}</b></h3>
                             <h4>{{company.products}}</h4>
                             <p>{{company.address}}</p>
                         </div>
@@ -85,12 +85,24 @@
                 </div>
                 <md-divider></md-divider>
 
-                <md-list-item class="md-2-line" ng-repeat="salesmen in allSalesmen">
+                <md-list-item class="md-2-line" ng-repeat="salesmen in allSalesmen track by $index">
                     <img ng-src="../images/default_avatar.png" class="md-avatar" alt="user avatar" />
                     <div class="md-list-item-text">
-                        <h3>{{salesmen.name}}</h3>
+                        <h3><b>{{salesmen.name}}</b></h3>
                         <p>{{salesmen.region}}</p>
+                        <div ng-hide="exInfo">
+                            <p>I.D: {{salesmen.id}}</p>
+                            <p>Password: {{salesmen.password}}</p>
+                        </div>
                     </div>
+
+
+                    <ng-md-icon ng-click="exInfo = !exInfo; clickToMorph($index)" options='{"duration": 375, "rotation": "none"}' icon="{{salesmen.more || 'expand_more'}}"
+                    style="fill: #B9B9B9; outline: none;" aria-label="see more info">
+                        <md-tooltip md-direction="left">
+                            See More Info
+                        </md-tooltip>
+                    </ng-md-icon>
                 </md-list-item>
                 <md-divider></md-divider>
             </md-list>
@@ -101,5 +113,8 @@
 
 <md-button ng-show="ifCompany" style="position:fixed; bottom: 5;" class="md-primary md-fab md-fab-bottom-right" ng-click="showAdvanced($event)"
 aria-label="Add Salesman">
+    <md-tooltip md-direction="left">
+        Add New Salesman
+    </md-tooltip>
     <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
 </md-button>
